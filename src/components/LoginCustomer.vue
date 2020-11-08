@@ -21,12 +21,10 @@
                 <div v-if="$v.f.username.$error && $v.f.username.$dirty" class="alert alert-danger mt-1">
                   <div v-if="$v.f.username.required.$invalid">Este campo es requerido</div>
                   <div v-if="$v.f.username.minLength.$invalid">Este campo debe tener al menos {{$v.f.username.minLength.$params.min}} caracteres</div>
-                          <div v-if="$v.f.username.maxLength.$invalid">Este campo debe tener máximo {{$v.f.username.maxLength.$params.max}} caracteres</div>
+                  <div v-if="$v.f.username.maxLength.$invalid">Este campo debe tener máximo {{$v.f.username.maxLength.$params.max}} caracteres</div>
                 </div>
             </div>
-                
-
-                <div class="form-group  col-12">
+            <div class="form-group  col-12">
                 <label for="password">Contraseña</label>
                 <input 
                   type="password"
@@ -48,11 +46,17 @@
                       value="Enviar"
                   >
             </div>
-            <div class="text-center">
-                <a class="reg-link" href="/register">¿Aún no estás registrado? Registrate acá.</a>
-              </div>
+
+            
           
           </form>
+          <div class="text-center">
+                <a class="reg-link" href="/register">¿Aún no estás registrado? Registrate acá.</a>            
+          </div>
+          <br>
+          <div class="text-center mb-3">
+                <a class="log-link" href="/login-owner">Soy dueño.</a>
+          </div>
         </div>
       </div>
     </div>
@@ -170,12 +174,12 @@ import { required, minLength, maxLength } from '@vuelidate/validators'
     font-weight: 500;
   }
 
-  .reg-link {
+  .reg-link, .log-link {
     color: rgb(209, 207, 207);
     text-decoration: none;
   }
 
-  .reg-link:hover {
+  .reg-link:hover, .log-link:hover {
     color: rgb(255, 255, 255);
     text-decoration: none;
   }
