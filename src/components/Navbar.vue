@@ -13,6 +13,11 @@
         </ul>
         <span class="navbar-text">
           <li class="nav-item">
+            <a class="nav-link login-btn mr-15" href="/register" :class="{change_btn: scrollPosition > 50}">Registrate</a>
+          </li>
+        </span>
+        <span class="navbar-text">
+          <li class="nav-item">
             <a class="nav-link login-btn" href="/login-customer" :class="{change_btn: scrollPosition > 50}">Iniciar Sesión</a>
           </li>
         </span>
@@ -38,7 +43,7 @@
     methods: {
        updateScroll() {
          this.scrollPosition = window.scrollY
-         console.log(this.scrollPosition)
+        //  console.log(this.scrollPosition)
       }
     },
     computed: {
@@ -90,6 +95,10 @@
   }
   .change_btn:hover{
         background-color: rgba(187, 186, 186, 0.637) !important;
+  }
+
+  .mr-15{
+    margin-right: 15px;
   }
   
 </style>
