@@ -4,6 +4,7 @@
     <Navbar/>
     <Carousel/>
     <Search/>
+    <Footer/>
 
     <div class="container">
       <div class="row">
@@ -20,6 +21,7 @@
   import Navbar from './Navbar.vue'
   import Carousel from './Carousel.vue'
   import Search from './Search.vue'
+  import Footer from './Footer.vue'
 
 
   export default  {
@@ -28,7 +30,8 @@
     components: {
     Navbar,
     Carousel,
-    Search
+    Search,
+    Footer
     },
     mounted () {
 

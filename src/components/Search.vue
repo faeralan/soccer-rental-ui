@@ -10,28 +10,35 @@
             <div class="card-body">
               <form novalidate autocomplete="off" @submit.prevent="enviar()">
                   <div class="form-group">
-                    <label for="barrio">Barrio</label>
+                    
                     <select name="barrio" id="barrio" class="custom-select custom-select-sm">
                       <option v-for="(barrio,i) in barrios" :key="i" value="{{barrio.name}}">{{barrio.name}}</option>
                     </select>
                   </div>
 
                   <div class="form-group">
-                    <label for="cant">Cantidad de jugadores</label>
+                    
                     <select name="cant" id="cant" class="custom-select custom-select-sm">
                       <option v-for="(cant,i) in cantidad" :key="i" value="{{cant.name}}">{{cant.name}}</option>
                     </select>
                   </div>
-
-                  <div class="form-group">
-                    
-                    <label for="horario">Horario</label>
-                    <select name="horario" id="horario" class="custom-select custom-select-sm">
-                      <option v-for="(hs,i) in turnos" :key="i" value="{{hs.value}}">{{hs.hour}}</option>
-                    </select>
-                  </div>
                   
-                    
+                  
+                  <div class="form-group">
+
+                    <div class="row">
+                      <div class="col">
+                        <input class="form-control form-control-sm" type="date" v-bind:value="today" v-bind:min="today" v-bind:max="maxDate" id="example-date-input">
+                      </div>
+
+                      <div class="col">
+                        <select name="horario" id="horario" class="custom-select custom-select-sm">
+                              <option v-for="(hs,i) in turnos" :key="i" value="{{hs.value}}">{{hs.hour}}</option>
+                          </select>
+                      </div>
+                    </div>
+                  </div>
+
                   <div class="form-group">
                     <input class="btn btn-color btn-md" type="submit" value="Buscar" >
                   </div>
@@ -41,23 +48,27 @@
         </div>
       </div>
     </div>
+    <Court />
   </section>
 
 </template>
 
 <script>
-  
+  import Court from './Court.vue'
+
   export default  {
     name: 'src-components-search',
     props: [],
     components: {
-      
+      Court
     },
     mounted () {
-
+      this.setDateMax()
     },
     data () {
       return {
+        today: new Date(Date.now()).toISOString().split('T')[0],
+        maxDate: this.today,
         turnos: [
           {'value':'08','hour':'08:00'},
           {'value':'09','hour':'09:00'},
@@ -137,6 +148,12 @@
       }
     },
     methods: {
+      setDateMax(){
+        var d = new Date();
+        d.setDate(d.getDate() + 7);
+
+        this.maxDate = new Date(d).toISOString().split('T')[0]        
+      }
 
     },
     computed: {
@@ -160,6 +177,7 @@
   }
 
    .btn-color{
+    margin-top: 20px;
     padding: 10px 50px;
     /* height: 42px; */
     background-color:rgba(154, 214, 149, 1) !important;
@@ -176,5 +194,14 @@
   .btn-color:hover{
       background-color: rgba(154, 214, 149, 0.8) !important;
       text-decoration: none !important;
+  }
+  .p-l-0{
+    padding-left: 0px !important;
+  }
+  .p-r-0{
+    padding-right: 0px !important;
+  }
+  .inline{
+    display: inline-block !important;
   }
 </style>
