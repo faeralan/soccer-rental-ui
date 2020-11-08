@@ -56,7 +56,7 @@
           </div>
           <br>
           <div class="text-center mb-3">
-                <a class="log-link" href="/login-owner">Soy cliente.</a>
+                <a class="log-link" href="/login-customer">Soy cliente.</a>
           </div>
 
         </div>
