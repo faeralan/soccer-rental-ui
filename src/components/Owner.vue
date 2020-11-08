@@ -70,7 +70,7 @@
   .btn-owner{
     padding: 10px 50px;
     /* height: 42px; */
-    background-color:rgba(235, 247, 234, 1) !important;
+    background-color:rgba(154, 214, 149, 1) !important;
     border-color: #ebf7ea;
     color:#333 !important;
 
@@ -82,7 +82,7 @@
     
   }
   .btn-owner:hover{
-      background-color: rgba(235,247,234, 0.8) !important;
+      background-color: rgba(154, 214, 149, 0.8) !important;
       text-decoration: none !important;
   }
 

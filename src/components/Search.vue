@@ -5,10 +5,37 @@
 
     <div class="container">
       <div class="row  d-flex justify-content-center">
-        <div class="col-md-6">
+        <div class="col-md-5">
           <div class="card shadow rounded">
             <div class="card-body">
-              
+              <form novalidate autocomplete="off" @submit.prevent="enviar()">
+                  <div class="form-group">
+                    <label for="barrio">Barrio</label>
+                    <select name="barrio" id="barrio" class="custom-select custom-select-sm">
+                      <option v-for="(barrio,i) in barrios" :key="i" value="{{barrio.name}}">{{barrio.name}}</option>
+                    </select>
+                  </div>
+
+                  <div class="form-group">
+                    <label for="cant">Cantidad de jugadores</label>
+                    <select name="cant" id="cant" class="custom-select custom-select-sm">
+                      <option v-for="(cant,i) in cantidad" :key="i" value="{{cant.name}}">{{cant.name}}</option>
+                    </select>
+                  </div>
+
+                  <div class="form-group">
+                    
+                    <label for="horario">Horario</label>
+                    <select name="horario" id="horario" class="custom-select custom-select-sm">
+                      <option v-for="(hs,i) in turnos" :key="i" value="{{hs.value}}">{{hs.hour}}</option>
+                    </select>
+                  </div>
+                  
+                    
+                  <div class="form-group">
+                    <input class="btn btn-color btn-md" type="submit" value="Buscar" >
+                  </div>
+                </form>
             </div>
           </div>
         </div>
@@ -23,11 +50,40 @@
   export default  {
     name: 'src-components-search',
     props: [],
+    components: {
+      
+    },
     mounted () {
 
     },
     data () {
       return {
+        turnos: [
+          {'value':'08','hour':'08:00'},
+          {'value':'09','hour':'09:00'},
+          {'value':'10','hour':'10:00'},
+          {'value':'11','hour':'11:00'},
+          {'value':'12','hour':'12:00'},
+          {'value':'13','hour':'13:00'},
+          {'value':'14','hour':'14:00'},
+          {'value':'15','hour':'15:00'},
+          {'value':'16','hour':'16:00'},
+          {'value':'17','hour':'17:00'},
+          {'value':'18','hour':'18:00'},
+          {'value':'19','hour':'19:00'},
+          {'value':'20','hour':'20:00'},
+          {'value':'21','hour':'21:00'},
+          {'value':'22','hour':'22:00'}
+        ],
+        cantidad: [
+          {'name':'Fútbol 5'},
+          {'name':'Fútbol 6'},
+          {'name':'Fútbol 7'},
+          {'name':'Fútbol 8'},
+          {'name':'Fútbol 9'},
+          {'name':'Fútbol 10'},
+          {'name':'Fútbol 11'}
+        ],        
         barrios: [
           {'name':'Agronomía'},
           {'name':'Almagro'},
@@ -98,5 +154,27 @@
   }
   .p-title{
     font-size: 26px;
+  }
+  label{
+    float: left;
+  }
+
+   .btn-color{
+    padding: 10px 50px;
+    /* height: 42px; */
+    background-color:rgba(154, 214, 149, 1) !important;
+    border-color: #ebf7ea;
+    color:#333 !important;
+
+    border-radius: 25px;
+    border: 1px solid #ebf7ea;
+    background-color: transparent;
+    font-size: 16px;
+    font-weight: 400;
+    
+  }
+  .btn-color:hover{
+      background-color: rgba(154, 214, 149, 0.8) !important;
+      text-decoration: none !important;
   }
 </style>

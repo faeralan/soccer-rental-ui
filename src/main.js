@@ -12,6 +12,8 @@ import { VuelidatePlugin } from '@vuelidate/core'
 import axios from 'axios'
 import VueAxios from 'vue-axios'
 
+// require('./plugins/fontawesome');
+
 createApp(App)
 .use(router)
 .use(VuelidatePlugin)
