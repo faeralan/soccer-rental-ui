@@ -4,11 +4,9 @@
     <div id="carouselExampleControls" class="carousel slide" data-ride="carousel">
       <div class="carousel-inner">
         
-        <div class="carousel-item active">
-          <img class="d-block w-100" src="../assets/slide2.jpg" alt="Second slide">
-        </div>
-        <div class="carousel-item">
-          <img class="d-block w-100" src="../assets/slide3.jpg" alt="Second slide">
+        <div class="carousel-item" v-for="(img, i) in images" :key="i" :class="{'active': i == 0}">
+          
+          <img class="d-block w-100" :src="require('@/'+img.ruta)" alt="Image">
         </div>
        
       </div>
@@ -35,7 +33,11 @@
     },
     data () {
       return {
-
+        images: [
+          { 'ruta' : 'assets/slide1.jpg'},
+          { 'ruta' : 'assets/slide1.jpg'},
+          { 'ruta' : 'assets/slide1.jpg'}
+        ]
       }
     },
     methods: {
