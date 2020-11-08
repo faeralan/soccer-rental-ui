@@ -55,6 +55,7 @@
             
           
           </form>
+
         </div>
       </div>
     </div>
@@ -125,6 +126,9 @@ import { required, minLength, maxLength } from '@vuelidate/validators'
               }
               console.log(form)
               this.sendDataFormAxios(form)
+                .then(() => {
+                  this.$router.push('/home')
+                })
               this.f = this.resetForm()
               this.$v.$reset()
             }

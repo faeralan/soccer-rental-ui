@@ -112,6 +112,7 @@
             </div> 
 
           </form>
+
         </div>
       </div>
     </div>
@@ -204,6 +205,12 @@ import { required, sameAs, not, minLength, maxLength, email } from '@vuelidate/v
               }
               console.log(form)
               this.sendDataFormAxios(form)
+                .then(() => {
+                  this.$router.push('/register-success')
+                })
+                .catch(() => {
+                  console.log("HTTP POST ERROR")
+                })
               this.f = this.resetForm()
               this.$v.$reset()
             }
