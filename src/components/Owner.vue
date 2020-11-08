@@ -13,11 +13,11 @@
         </div>
         <div class="col-md-4">
           <div class="col-md-12">
-            <a class="btn-owner" href="#">Sumate</a>
+            <a class="btn-owner" href="/register">Sumate</a>
           </div>
           <br>
           <div class="col-md-12">
-            <a class="btn-owner" href="#">Acceder</a>
+            <a class="btn-owner" href="/login-owner">Acceder</a>
           </div>
         </div>
       </div>
