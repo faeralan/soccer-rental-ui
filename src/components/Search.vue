@@ -48,25 +48,29 @@
         </div>
       </div>
     </div>
-    <Court />
+    <Spinner v-if="loading" />
+    <Court :resultados="results"/>
   </section>
 
 </template>
 
 <script>
   import Court from './Court.vue'
+  import Spinner from './Spinner.vue'
 
   export default  {
     name: 'src-components-search',
     props: [],
     components: {
-      Court
+      Court,
+      Spinner
     },
     mounted () {
       this.setDateMax()
     },
     data () {
       return {
+        loading: false,
         today: new Date(Date.now()).toISOString().split('T')[0],
         maxDate: this.today,
         turnos: [
@@ -144,7 +148,11 @@
           {'name':'Villa Urquiza'},
           {'name':'Villa del Parque'},
           {'name':'Vélez Sarsfield'}
-        ]
+        ],
+        results: [
+          
+        ],
+        url: 'https://5f9509db2de5f50016ca1c9d.mockapi.io/api/v1/courts'
       }
     },
     methods: {
@@ -153,6 +161,23 @@
         d.setDate(d.getDate() + 7);
 
         this.maxDate = new Date(d).toISOString().split('T')[0]        
+      },
+      async sendDatosForm() {
+        
+        try {
+          let data = await this.axios.get(this.url, {
+            'content-type': 'application/json'
+          })
+          this.loading = false;
+          this.results = data.data;
+
+        } catch (error) {
+          console.error(error)
+        }
+      },
+      enviar(){
+        this.loading = true;
+        this.sendDatosForm();
       }
 
     },
