@@ -5,6 +5,8 @@ import LoginCustomer from '../components/LoginCustomer.vue'
 import LoginOwner from '../components/LoginOwner.vue'
 import Register from '../components/Register.vue'
 import RegisterSuccess from '../components/RegisterSuccess.vue'
+import Details from '../components/Details.vue'
+import Confirmation from '../components/Confirmation.vue'
 
 const routes = [
     { path: '/', name: 'Index', component: Index },
@@ -12,7 +14,9 @@ const routes = [
     { path: '/login-customer', name: 'LoginCustomer', component: LoginCustomer },
     { path: '/login-owner', name: 'LoginOwner', component: LoginOwner },
     { path: '/register', name: 'Register', component: Register },
-    { path: '/register-success', name: 'RegisterSuccess', component: RegisterSuccess }
+    { path: '/register-success', name: 'RegisterSuccess', component: RegisterSuccess },
+    { path: '/details/:id', name: 'Details', component: Details, props: true },
+    { path: '/confirmation', name: 'Confirmation', component: Confirmation}
 ]
 
 const router = createRouter({

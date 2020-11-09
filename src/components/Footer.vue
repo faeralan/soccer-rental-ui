@@ -1,7 +1,11 @@
 <template>
 
   <section class="src-components-footer">
-    
+    <div class="row">
+      <div class="col">
+        <p>Alan Faerverguer - Jeremy Bacher - Franco Villarreal - NT2 2020</p>
+      </div>
+    </div>
   </section>
 
 </template>
@@ -33,6 +37,9 @@
 <style scoped lang="css">
   .src-components-footer {
     background-color: #ebf7ea !important;
-    padding: 80px 0px !important
+    padding: 20px 0px !important
+  }
+  p{
+    font-weight: 600;
   }
 </style>

@@ -213,7 +213,7 @@
     border: 1px solid #ebf7ea;
     background-color: transparent;
     font-size: 16px;
-    font-weight: 400;
+    font-weight: 600;
     
   }
   .btn-color:hover{
