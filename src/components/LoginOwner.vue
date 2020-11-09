@@ -52,7 +52,7 @@
           </form>
 
           <div class="text-center">
-                <a class="reg-link" href="/register">¿Aún no estás registrado? Registrate acá.</a>            
+                <a class="reg-link" href="/register-owner">¿Aún no estás registrado? Registrate acá.</a>            
           </div>
           <br>
           <div class="text-center mb-3">
@@ -81,7 +81,7 @@ import { required, minLength, maxLength } from '@vuelidate/validators'
     data () {
       return {
         f: this.resetForm(),
-        url : 'https://5f93837c8742070016da699e.mockapi.io/grupo-maravilla/login-owner'
+        url : 'https://localhost:3000/login'
       }
     },
     validations: {
@@ -126,6 +126,7 @@ import { required, minLength, maxLength } from '@vuelidate/validators'
               let form = {
                 username: this.$v.f.username.$model,
                 password: this.$v.f.password.$model,
+                owner: true
               }
               console.log(form)
               this.sendDataFormAxios(form)

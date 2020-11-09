@@ -1,6 +1,6 @@
 <template>
 
-  <section class="src-components-register">
+  <section class="src-components-register-customer">
     <div class="container">
       <div class="row justify-content-center">
         <div class="col-md-6 col-xl-4 form-box mt-5 mb-5">
@@ -94,9 +94,12 @@
                   class="form-control"
                   v-model="$v.f.passwordConfirm.$model"
                 >
-                <div v-if="$v.f.passwordConfirm.$error && $v.f.passwordConfirm.$dirty" class="alert alert-danger mt-1">
+                
+                <div v-if="($v.f.passwordConfirm.$error && $v.f.passwordConfirm.$dirty) || ($v.f.passwordConfirm.$model != $v.f.password.$model)" class="alert alert-danger mt-1">
                   <div v-if="$v.f.passwordConfirm.required.$invalid">- Este campo es requerido.</div>
+                  <div v-if="$v.f.passwordConfirm.$model != $v.f.password.$model">- Las contraseñas no coinciden.</div>
                 </div>
+
             </div>
 
             <div class="form-group col-4">
@@ -124,7 +127,7 @@
 import { required, sameAs, not, minLength, maxLength, email } from '@vuelidate/validators'
 
   export default  {
-    name: 'src-components-register',
+    name: 'src-components-register-customer',
     props: [],
     components: {
       

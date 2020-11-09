@@ -9,7 +9,8 @@
           <h2 class="mt-3">¡Registro exitoso!</h2>
           <hr>
           <div class="text-center mb-3">
-                <a class="reg-link" href="/home">Ir a la pantalla principal.</a>
+                <a class="reg-link" href="/login-customer">Soy cliente.</a>
+                <a class="reg-link" href="/login-customer">Soy Dueño.</a>
           </div>
 
         </div>
@@ -25,7 +26,7 @@
     name: 'src-components-register-success',
     props: [],
     mounted () {
-      this.redirect()
+      
     },
     data () {
       return {
@@ -33,11 +34,7 @@
       }
     },
     methods: {
-      redirect(){
-        setTimeout(() => {
-          this.$router.push('/home')
-        }, 3000)  
-      }
+      
     },
     computed: {
 
