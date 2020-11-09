@@ -47,14 +47,17 @@
                         class="btn btn-success mt-4"
                         value="Enviar"
                     >             
-              </div>
-              <div class="text-center">
-                <a class="reg-link" href="/register">¿Aún no estás registrado? Registrate acá.</a>
-              </div>
-    
-            
+              </div>            
           
           </form>
+
+          <div class="text-center">
+                <a class="reg-link" href="/register">¿Aún no estás registrado? Registrate acá.</a>            
+          </div>
+          <br>
+          <div class="text-center mb-3">
+                <a class="log-link" href="/login-customer">Soy cliente.</a>
+          </div>
 
         </div>
       </div>
@@ -171,12 +174,12 @@ import { required, minLength, maxLength } from '@vuelidate/validators'
     font-weight: 500;
   }
 
-  .reg-link {
+  .reg-link, .log-link {
     color: rgb(209, 207, 207);
     text-decoration: none;
   }
 
-  .reg-link:hover {
+  .reg-link:hover, .log-link:hover {
     color: rgb(255, 255, 255);
     text-decoration: none;
   }
