@@ -76,6 +76,9 @@ import { required } from '@vuelidate/validators'
       
     },
     mounted () {
+      if(this.$store.state.isLoggedCustomer){
+        this.$router.push('/home')
+      }
       this.resetForm()
     },
     data () {
@@ -100,6 +103,9 @@ import { required } from '@vuelidate/validators'
           this.axios.post(this.url, data, {'content-type': 'application/json'})
             .then(res => {
               if (res.data) {
+                
+                sessionStorage.setItem('customer',res.data.token)
+                this.$store.dispatch('getStatusCustomer', true);
                 this.$router.push('/home')
               }
             })
@@ -128,7 +134,7 @@ import { required } from '@vuelidate/validators'
         }
     },
     computed: {
-
+      
     }
 }
 

@@ -75,6 +75,9 @@ export default {
     Footer,
   },
   mounted() {
+    if(!this.$store.state.isLoggedCustomer){
+      this.$router.push('/')
+    }
     this.getDatos();
   },
   data() {

@@ -38,7 +38,7 @@
     name: 'src-components-navbar-owner',
     props: [],
     mounted () {
-
+      
     },
     data () {
       return {

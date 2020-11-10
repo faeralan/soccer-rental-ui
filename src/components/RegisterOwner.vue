@@ -137,6 +137,9 @@ import { required, minLength, maxLength, email } from '@vuelidate/validators'
       
     },
     mounted () {
+      if(this.$store.state.isLoggedOwner){
+        this.$router.push('/admin/index')
+      }
       this.resetForm()
     },
     data () {

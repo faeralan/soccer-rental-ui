@@ -3,24 +3,18 @@ import { createStore } from 'vuex'
 export default createStore({
     state(){
         return {
-            isLoggedOwner: false,
-            isLoggedCustomer: false
+            isLoggedOwner: sessionStorage.getItem('owner') ? true : false,
+            isLoggedCustomer: sessionStorage.getItem('customer') ? true : false
         }
     },
     actions: {
-        getStatusOwner({commit}){
-            let status = false;
-            if(sessionStorage.getItem('owner')){
-                status = true;
-            }
+        getStatusOwner({commit}, status){
+           
             commit('setLoggedOwner', status);
                 
         },
-        getStatusCustomer({commit}){
-            let status = false;
-            if(sessionStorage.getItem('customer')){
-                status = true;
-            }
+        getStatusCustomer({commit}, status){
+           
             commit('setLoggedCustomer', status);
                 
         }

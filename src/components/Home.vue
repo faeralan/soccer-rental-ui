@@ -34,7 +34,9 @@
     Footer
     },
     mounted () {
-
+      if(!this.$store.state.isLoggedCustomer){
+        this.$router.push('/')
+      }
     },
     data () {
       return {

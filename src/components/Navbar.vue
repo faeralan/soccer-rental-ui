@@ -53,7 +53,6 @@
     props: [],
     mounted () {
       window.addEventListener('scroll', this.updateScroll);
-      this.verifyLogin()
     },
     data () {
       return {
@@ -65,16 +64,11 @@
          this.scrollPosition = window.scrollY
         //  console.log(this.scrollPosition)
        },
-       verifyLogin(){
-         this.$store.dispatch('getStatusCustomer');
-       }
+       
       
     },
     computed: {
-      isLogged(){
-        console.log(this.$store.state.isLoggedCustomer)
-        return this.$store.state.isLoggedCustomer
-      }
+     
     }
 }
 

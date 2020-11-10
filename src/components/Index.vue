@@ -21,6 +21,9 @@
     name: 'src-components-index',
     props: [],
     mounted () {
+      if(this.$store.state.isLoggedCustomer){
+        this.$router.push('/home')
+      }
     },
     components: {
       Navbar,

@@ -11,15 +11,15 @@
               <form novalidate autocomplete="off" @submit.prevent="enviar()">
                   <div class="form-group">
                     
-                    <select name="barrio" id="barrio" class="custom-select custom-select-sm">
-                      <option v-for="(barrio,i) in barrios" :key="i" value="{{barrio.name}}">{{barrio.name}}</option>
+                    <select v-model="$v.f.neighborhood.$model" name="barrio" id="barrio" class="custom-select custom-select-sm">
+                      <option v-for="(barrio,i) in barrios" :key="i" :value="barrio.name">{{barrio.name}}</option>
                     </select>
                   </div>
 
                   <div class="form-group">
                     
-                    <select name="cant" id="cant" class="custom-select custom-select-sm">
-                      <option v-for="(cant,i) in cantidad" :key="i" value="{{cant.name}}">{{cant.name}}</option>
+                    <select v-model="$v.f.players.$model" name="cant" id="cant" class="custom-select custom-select-sm">
+                      <option v-for="(cant,i) in cantidad" :key="i" :value="cant.value">{{cant.name}}</option>
                     </select>
                   </div>
                   
@@ -28,12 +28,12 @@
 
                     <div class="row">
                       <div class="col">
-                        <input class="form-control form-control-sm" type="date" v-bind:value="today" v-bind:min="today" v-bind:max="maxDate" id="example-date-input">
+                        <input v-model="$v.f.date.$model" class="form-control form-control-sm" type="date" v-bind:min="today" v-bind:max="maxDate" id="example-date-input">
                       </div>
 
                       <div class="col">
-                        <select name="horario" id="horario" class="custom-select custom-select-sm">
-                              <option v-for="(hs,i) in turnos" :key="i" value="{{hs.value}}">{{hs.hour}}</option>
+                        <select v-model="$v.f.hour.$model" name="horario" id="horario" class="custom-select custom-select-sm">
+                              <option v-for="(hs,i) in turnos" :key="i" :value="hs.value">{{hs.hour}}</option>
                           </select>
                       </div>
                     </div>
@@ -57,6 +57,7 @@
 <script>
   import Court from './Court.vue'
   import Spinner from './Spinner.vue'
+  import { required } from '@vuelidate/validators'
 
   export default  {
     name: 'src-components-search',
@@ -70,6 +71,7 @@
     },
     data () {
       return {
+        url : 'https://evening-hollows-89542.herokuapp.com/courts',
         loading: false,
         today: new Date(Date.now()).toISOString().split('T')[0],
         maxDate: this.today,
@@ -91,68 +93,87 @@
           {'value':'22','hour':'22:00'}
         ],
         cantidad: [
-          {'name':'Fútbol 5'},
-          {'name':'Fútbol 6'},
-          {'name':'Fútbol 7'},
-          {'name':'Fútbol 8'},
-          {'name':'Fútbol 9'},
-          {'name':'Fútbol 10'},
-          {'name':'Fútbol 11'}
+          {'value':'5','name':'Fútbol 5'},
+          {'value':'6','name':'Fútbol 6'},
+          {'value':'7','name':'Fútbol 7'},
+          {'value':'8','name':'Fútbol 8'},
+          {'value':'9','name':'Fútbol 9'},
+          {'value':'10','name':'Fútbol 10'},
+          {'value':'11','name':'Fútbol 11'}
         ],        
         barrios: [
-          {'name':'Agronomía'},
-          {'name':'Almagro'},
-          {'name':'Balvanera'},
-          {'name':'Barracas'},
-          {'name':'Belgrano'},
-          {'name':'Boedo'},
-          {'name':'Caballito'},
-          {'name':'Chacarita'},
-          {'name':'Coghlan'},
-          {'name':'Colegiales'},
-          {'name':'Constitución'},
-          {'name':'Flores'},
-          {'name':'Floresta'},
-          {'name':'La Boca'},
-          {'name':'La Paternal'},
-          {'name':'Liniers'},
-          {'name':'Mataderos'},
-          {'name':'Monte Castro'},
-          {'name':'Montserrat'},
-          {'name':'Nueva Pompeya'},
-          {'name':'Nuñez'},
-          {'name':'Palermo'},
-          {'name':'Parque Avellaneda'},
-          {'name':'Parque Chacabuco'},
-          {'name':'Parque Chas'},
-          {'name':'Parque Patricios'},
-          {'name':'Puerto Madero'},
-          {'name':'Recoleta'},
-          {'name':'Retiro'},
-          {'name':'Saavedra'},
-          {'name':'San Cristóbal'},
-          {'name':'San Nicolás'},
-          {'name':'San Telmo'},
-          {'name':'Versalles'},
-          {'name':'Villa Crespo'},
-          {'name':'Villa Devoto'},
-          {'name':'Villa General Mitre'},
-          {'name':'Villa Lugano'},
-          {'name':'Villa Luro'},
-          {'name':'Villa Ortúzar'},
-          {'name':'Villa Pueyrredón'},
-          {'name':'Villa Real'},
-          {'name':'Villa Riachuelo'},
-          {'name':'Villa Santa Rita'},
-          {'name':'Villa Soldati'},
-          {'name':'Villa Urquiza'},
-          {'name':'Villa del Parque'},
-          {'name':'Vélez Sarsfield'}
+          {'value':'Agronomía','name':'Agronomía'},
+          {'value':'Almagro','name':'Almagro'},
+          {'value':'Balvanera','name':'Balvanera'},
+          {'value':'Barracas','name':'Barracas'},
+          {'value':'Belgrano','name':'Belgrano'},
+          {'value':'Boedo','name':'Boedo'},
+          {'value':'Caballito','name':'Caballito'},
+          {'value':'Chacarita','name':'Chacarita'},
+          {'value':'Coghlan','name':'Coghlan'},
+          {'value':'Colegiales','name':'Colegiales'},
+          {'value':'Constitución','name':'Constitución'},
+          {'value':'Flores','name':'Flores'},
+          {'value':'Floresta','name':'Floresta'},
+          {'value':'La Boca','name':'La Boca'},
+          {'value':'La Paternal','name':'La Paternal'},
+          {'value':'Liniers','name':'Liniers'},
+          {'value':'Mataderos','name':'Mataderos'},
+          {'value':'Monte Castro','name':'Monte Castro'},
+          {'value':'Montserrat','name':'Montserrat'},
+          {'value':'Nueva Pompeya','name':'Nueva Pompeya'},
+          {'value':'Nuñez','name':'Nuñez'},
+          {'value':'Palermo','name':'Palermo'},
+          {'value':'Parque Avellaneda','name':'Parque Avellaneda'},
+          {'value':'Parque Chacabuco','name':'Parque Chacabuco'},
+          {'value':'Parque Chas','name':'Parque Chas'},
+          {'value':'Parque Patricios','name':'Parque Patricios'},
+          {'value':'Puerto Madero','name':'Puerto Madero'},
+          {'value':'Recoleta','name':'Recoleta'},
+          {'value':'Retiro','name':'Retiro'},
+          {'value':'Saavedra','name':'Saavedra'},
+          {'value':'San Cristóbal','name':'San Cristóbal'},
+          {'value':'San Nicolás','name':'San Nicolás'},
+          {'value':'San Telmo','name':'San Telmo'},
+          {'value':'Versalles','name':'Versalles'},
+          {'value':'Villa Crespo','name':'Villa Crespo'},
+          {'value':'Villa Devoto','name':'Villa Devoto'},
+          {'value':'Villa General Mitre','name':'Villa General Mitre'},
+          {'value':'Villa Lugano','name':'Villa Lugano'},
+          {'value':'Villa Luro','name':'Villa Luro'},
+          {'value':'Villa Ortúzar','name':'Villa Ortúzar'},
+          {'value':'Villa Pueyrredón','name':'Villa Pueyrredón'},
+          {'value':'Villa Real','name':'Villa Real'},
+          {'value':'Villa Riachuelo','name':'Villa Riachuelo'},
+          {'value':'Villa Santa Rita','name':'Villa Santa Rita'},
+          {'value':'Villa Soldati','name':'Villa Soldati'},
+          {'value':'Villa Urquiza','name':'Villa Urquiza'},
+          {'value':'Villa del Parque','name':'Villa del Parque'},
+          {'value':'Vélez Sarsfield','name':'Vélez Sarsfield'}
         ],
-        results: [
-          
-        ],
-        url: 'https://5f9509db2de5f50016ca1c9d.mockapi.io/api/v1/courts'
+        results: [],
+        f: {
+          date: new Date(Date.now()).toISOString().split('T')[0],
+          players: '5',
+          hour: '08',
+          neighborhood: 'Agronomía'
+        }
+      }
+    },
+    validations: {
+      f: {
+        players: { 
+          required
+        },
+        neighborhood: { 
+          required
+        },
+        date: { 
+          required
+        },
+        hour: { 
+          required
+        }
       }
     },
     methods: {
@@ -165,8 +186,12 @@
       async sendDatosForm() {
         
         try {
+          const headers = {
+            'Content-Type': 'application/json',
+            'Authorization': `${sessionStorage.getItem('customer')}`
+          }
           let data = await this.axios.get(this.url, {
-            'content-type': 'application/json'
+            headers
           })
           this.loading = false;
           this.results = data.data;
@@ -176,8 +201,19 @@
         }
       },
       enviar(){
-        this.loading = true;
-        this.sendDatosForm();
+        this.$v.$touch()
+        if(!this.$v.$invalid) {
+          let form = {
+            players: this.$v.f.players.$model,
+            neighborhood: this.$v.f.neighborhood.$model,
+            date: 1604916000
+          }
+          this.loading = true;
+          console.log(form)
+          this.sendDatosForm(form)
+        }
+        
+        
       }
 
     },

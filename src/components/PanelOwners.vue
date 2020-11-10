@@ -15,7 +15,9 @@
       NavbarOwner
     },
     mounted () {
-
+      if(!this.$store.state.isLoggedOwner){
+        this.$router.push('/login-owner')
+      }
     },
     data () {
       return {

@@ -75,6 +75,9 @@ import { required } from '@vuelidate/validators'
       
     },
     mounted () {
+      if(this.$store.state.isLoggedOwner){
+        this.$router.push('/admin/index')
+      }
       this.resetForm()
     },
     data () {
@@ -98,7 +101,9 @@ import { required } from '@vuelidate/validators'
           this.axios.post(this.url, data, {'content-type': 'application/json'})
             .then(res => {
               if (res.data) {
-                this.$router.push('/home')
+                sessionStorage.setItem('owner',res.data.token)
+                this.$store.dispatch('getStatusOwner', true);
+                this.$router.push('/admin/index')
               }
             })
             .catch(error => {
