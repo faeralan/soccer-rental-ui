@@ -5,7 +5,7 @@
       
     <div class="container">
       <div class="row">
-        <div class="col-md-4">
+        <div class="col-md-4 space-box">
           <div class="card shadow rounded">
             <div class="card-header">
               Buscá
@@ -18,7 +18,7 @@
           </div>
         </div>
 
-        <div class="col-md-4">
+        <div class="col-md-4 space-box">
           <div class="card shadow rounded">
             <div class="card-header">
               Reservá
@@ -31,7 +31,7 @@
           </div>
         </div>
 
-        <div class="col-md-4">
+        <div class="col-md-4 space-box">
           <div class="card shadow rounded">
             <div class="card-header">
               Jugá
@@ -77,7 +77,7 @@
 <style scoped lang="css">
   .src-components-information {
     background-color: #fafafa !important;
-    padding: 80px 0px ;
+    padding: 40px 0px ;
   }
   .p-title{
     font-size: 25px;
@@ -93,5 +93,9 @@
   .blockquote p{
     font-size: 16px !important;
     text-align: left;
+  }
+
+  .space-box{
+    padding-bottom: 20px;
   }
 </style>

@@ -91,9 +91,11 @@ export default {
   methods: {
     async getDatos() {
       try {
-        let data = await this.axios.get(this.url, {
-          "content-type": "application/json",
-        });
+        const headers = {
+          'Content-Type': 'application/json',
+          'Authorization': 'Bearer'+this.$store.state.isLoggedCustomer
+        }
+        let data = await this.axios.get(this.url, headers);
         this.loading = false;
         this.court = data.data;
       } catch (error) {

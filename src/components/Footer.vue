@@ -1,9 +1,11 @@
 <template>
 
   <section class="src-components-footer">
-    <div class="row">
-      <div class="col">
-        <p>Alan Faerverguer - Jeremy Bacher - Franco Villarreal - NT2 2020</p>
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-12">
+          <p>Alan Faerverguer - Jeremy Bacher - Franco Villarreal - NT2 2020</p>
+        </div>
       </div>
     </div>
   </section>

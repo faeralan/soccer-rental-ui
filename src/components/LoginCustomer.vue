@@ -105,7 +105,7 @@ import { required } from '@vuelidate/validators'
               if (res.data) {
                 
                 sessionStorage.setItem('customer',res.data.token)
-                this.$store.dispatch('getStatusCustomer', true);
+                this.$store.dispatch('getStatusCustomer', res.data.token);
                 this.$router.push('/home')
               }
             })

@@ -4,7 +4,7 @@ export default createStore({
     state(){
         return {
             isLoggedOwner: sessionStorage.getItem('owner') ? true : false,
-            isLoggedCustomer: sessionStorage.getItem('customer') ? true : false
+            isLoggedCustomer: sessionStorage.getItem('customer') ? sessionStorage.getItem('customer') : false
         }
     },
     actions: {

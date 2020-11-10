@@ -53,7 +53,7 @@
 <style scoped lang="css">
  .src-components-owner {
     background-color: #fafafa !important;
-    padding: 80px 0px 160px 0px;
+    padding: 40px 0px 80px 0px;
   }
   .p-title{
     font-size: 25px;
