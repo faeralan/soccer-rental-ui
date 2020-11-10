@@ -9,6 +9,9 @@
           <form novalidate autocomplete="off" class="p-3 mt-3 mb-3 text-left" @submit.prevent="send()">
             <h4 class="text-black text-left ml-3">Iniciar Sesión</h4>
             <hr>
+            <div v-if="error" class="alert alert-danger">
+              Los datos ingresados son incorrectos.
+            </div>
             <div class="form-group col-12">
                 <label for="username">Correo electrónico</label>
                 <input 
@@ -91,26 +94,17 @@ import { required } from '@vuelidate/validators'
       }
     },
     methods: {
-      async sendDataFormAxios(data) {
-            
-            try {
-              if(data){
-                let res = await this.axios.post(this.url, data, {'content-type': 'application/json'})
-                console.log(res.data)
+      sendDataFormAxios(data) {   
+          this.axios.post(this.url, data, {'content-type': 'application/json'})
+            .then(res => {
+              if (res.data) {
+                this.$router.push('/home')
               }
-            }
-            catch(error) {
-              console.log('HTTP POST ERROR', error)
-            }
-        },
-        async getDataFormAxios() {
-            try {
-              let res = await this.axios(this.url)
-              console.log(res.data)
-            }
-            catch(error) {
-              console.log('HTTP GET ERROR', error)
-            }
+            })
+            .catch(error => {
+              console.log(error)
+              this.error = true             
+            })
         },
         send() {
             this.$v.$touch()
@@ -120,13 +114,7 @@ import { required } from '@vuelidate/validators'
                 password: this.$v.f.password.$model,
                 owner: true
               }
-              console.log(form)
               this.sendDataFormAxios(form)
-                .then(() => {
-                  this.$router.push('/home')
-                })
-              this.f = this.resetForm()
-              this.$v.$reset()
             }
         },
         resetForm() {

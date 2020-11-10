@@ -1,6 +1,7 @@
 <template>
 
   <section class="src-components-register-owner">
+    <!-- <Navbar /> -->
     <div class="container">
       <div class="row justify-content-center">
         <div class="col-md-6 col-xl-4 form-box mt-5 mb-5">
@@ -11,7 +12,9 @@
             <h4 class="text-black text-left ml-3">Registrarse</h4>
 
             <hr>
-
+            <div v-if="error" class="alert alert-danger">
+              Los datos ingresados son incorrectos.
+            </div>
             <div class="form-group col-12">
                 <label for="name">Nombre</label>
                 <input 
@@ -124,6 +127,7 @@
 </template>
 
 <script>
+//import Navbar from './Navbar.vue'
 import { required, minLength, maxLength, email } from '@vuelidate/validators'
 
   export default  {
@@ -138,7 +142,8 @@ import { required, minLength, maxLength, email } from '@vuelidate/validators'
     data () {
       return {
         f: this.resetForm(),
-        url : 'https://5f93837c8742070016da699e.mockapi.io/grupo-maravilla/register/'
+        url : 'https://evening-hollows-89542.herokuapp.com/owners',
+        error: false
       }
     },
     validations: {
@@ -171,26 +176,18 @@ import { required, minLength, maxLength, email } from '@vuelidate/validators'
       }
     },
     methods: {
-      async sendDataFormAxios(data) {
+      sendDataFormAxios(data) {
             
-            try {
-              if(data){
-                let res = await this.axios.post(this.url, data, {'content-type': 'application/json'})
-                console.log(res.data)
+            this.axios.post(this.url, data, {'content-type': 'application/json'})
+            .then(res => {
+              if (res.data) {
+                this.$router.push('/register-success')
               }
-            }
-            catch(error) {
-              console.log('HTTP POST ERROR', error)
-            }
-        },
-        async getDataFormAxios() {
-            try {
-              let res = await this.axios(this.url)
-              console.log(res.data)
-            }
-            catch(error) {
-              console.log('HTTP GET ERROR', error)
-            }
+            })
+            .catch(error => {
+              console.log(error)
+              this.error = true             
+            })
         },
         send() {
             this.$v.$touch()
@@ -204,16 +201,7 @@ import { required, minLength, maxLength, email } from '@vuelidate/validators'
                 password: this.$v.f.password.$model,
                 passwordConfirm: this.$v.f.passwordConfirm.$model
               }
-              console.log(form)
               this.sendDataFormAxios(form)
-                .then(() => {
-                  this.$router.push('/register-success')
-                })
-                .catch(() => {
-                  console.log("HTTP POST ERROR")
-                })
-              this.f = this.resetForm()
-              this.$v.$reset()
             }
         },
         resetForm() {

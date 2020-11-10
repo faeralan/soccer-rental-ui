@@ -8,9 +8,11 @@
          <!-- REGISTER SUCCESS -->
           <h2 class="mt-3">¡Registro exitoso!</h2>
           <hr>
-          <div class="text-center mb-3">
-                <a class="reg-link" href="/login-customer">Soy cliente.</a>
-                <a class="reg-link" href="/login-customer">Soy Dueño.</a>
+          <h5 class="mt-3">Ya podés iniciar sesión.</h5>
+          <br>
+          <div class="text-center mb-3 col-12">
+                <a class="reg-link float-left ml-5 mb-3" href="/login-customer">Soy cliente.</a>
+                <a class="reg-link float-right mr-5 mb-3" href="/login-owner">Soy Dueño.</a>
           </div>
 
         </div>
@@ -61,7 +63,7 @@
     border-radius: 10px;
   }
 
-  h2 {
+  h2, h5{
     color: white;
   }
 

@@ -11,7 +11,9 @@
             <h4 class="text-black text-left ml-3">Registrarse</h4>
 
             <hr>
-
+            <div v-if="error" class="alert alert-danger">
+              Los datos ingresados son incorrectos.
+            </div>
             <div class="form-group col-12">
                 <label for="name">Nombre</label>
                 <input 
@@ -138,8 +140,8 @@ import { required, minLength, maxLength, email } from '@vuelidate/validators'
     data () {
       return {
         f: this.resetForm(),
-        //url : 'https://5f93837c8742070016da699e.mockapi.io/grupo-maravilla/register'
-        url : ''
+        url : 'https://evening-hollows-89542.herokuapp.com/customers',
+        error: false
       }
     },
     validations: {
@@ -172,16 +174,17 @@ import { required, minLength, maxLength, email } from '@vuelidate/validators'
       }
     },
     methods: {
-      async sendDataFormAxios(data) {  
-            try {
-              if(data){
-                let res = await this.axios.post(this.url, data, {'content-type': 'application/json'})
-                console.log(res.data)
+      sendDataFormAxios(data) {  
+            this.axios.post(this.url, data, {'content-type': 'application/json'})
+            .then(res => {
+              if (res.data) {
+                this.$router.push('/register-success')
               }
-            }
-            catch(error) {
-              console.log('HTTP POST ERROR', error)
-            }
+            })
+            .catch(error => {
+              console.log(error)
+              this.error = true             
+            })
         },
         send() {
             this.$v.$touch()
@@ -196,16 +199,7 @@ import { required, minLength, maxLength, email } from '@vuelidate/validators'
                 passwordConfirm: this.$v.f.passwordConfirm.$model
               }
               console.log(form)
-              this.sendDataFormAxios(form)
-                .then(() => {                 
-                  this.f = this.resetForm()
-                  this.$v.$reset()
-                  this.$router.push('/register-success')     
-                })
-                .catch(() => {
-                  console.log("HTTP POST ERROR")
-                })
-              
+              this.sendDataFormAxios(form)              
             }
         },
         resetForm() {
