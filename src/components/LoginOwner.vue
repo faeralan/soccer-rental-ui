@@ -104,7 +104,8 @@ import { required, minLength, maxLength } from '@vuelidate/validators'
             try {
               if(data){
                 let res = await this.axios.post(this.url, data, {'content-type': 'application/json'})
-                console.log(res.data)
+                console.log("res",res.data)
+                // sessionStorage.setItem('admin', res.data);
               }
             }
             catch(error) {
@@ -130,7 +131,7 @@ import { required, minLength, maxLength } from '@vuelidate/validators'
               console.log(form)
               this.sendDataFormAxios(form)
                 .then(() => {
-                  this.$router.push('/home')
+                  this.$router.push('/admin/index')
                 })
               this.f = this.resetForm()
               this.$v.$reset()

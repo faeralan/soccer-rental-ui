@@ -1,7 +1,7 @@
 <template>
 
   <section class="src-components-navbar">
-    <nav class="navbar fixed-top navbar-expand-lg navbar-light bg-info" :class="{change_color: scrollPosition > 50}">
+    <nav v-if="!$store.state.isLoggedCustomer" class="navbar fixed-top navbar-expand-lg navbar-light bg-info" :class="{change_color: scrollPosition > 50}">
       <a class="font-italic navbar-brand" href="#" :class="{change_color: scrollPosition > 50}">Juego Limpio</a>
       <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarText" aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
@@ -23,6 +23,25 @@
         </span>
       </div>
     </nav>
+
+
+    <nav v-else-if="$store.state.isLoggedCustomer" class="navbar fixed-top navbar-expand-lg navbar-light bg-info" :class="{change_color: scrollPosition > 50}">
+      <a class="font-italic navbar-brand" href="#" :class="{change_color: scrollPosition > 50}">Juego Limpio</a>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarText" aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarText">
+        <ul class="navbar-nav mr-auto">
+          
+          
+        </ul>
+        <span class="navbar-text">
+          <li class="nav-item">
+            <a class="nav-link login-btn" href="/login-customer" :class="{change_btn: scrollPosition > 50}">Cerrar Sesión</a>
+          </li>
+        </span>
+      </div>
+    </nav>
   </section>
 
 </template>
@@ -34,6 +53,7 @@
     props: [],
     mounted () {
       window.addEventListener('scroll', this.updateScroll);
+      this.verifyLogin()
     },
     data () {
       return {
@@ -44,10 +64,17 @@
        updateScroll() {
          this.scrollPosition = window.scrollY
         //  console.log(this.scrollPosition)
-      }
+       },
+       verifyLogin(){
+         this.$store.dispatch('getStatusCustomer');
+       }
+      
     },
     computed: {
-
+      isLogged(){
+        console.log(this.$store.state.isLoggedCustomer)
+        return this.$store.state.isLoggedCustomer
+      }
     }
 }
 

@@ -21,7 +21,6 @@
     name: 'src-components-index',
     props: [],
     mounted () {
-
     },
     components: {
       Navbar,
@@ -36,7 +35,7 @@
       }
     },
     methods: {
-
+      
     },
     computed: {
 

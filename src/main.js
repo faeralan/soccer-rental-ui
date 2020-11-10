@@ -2,6 +2,7 @@ import { createApp } from 'vue'
 import App from './App.vue'
 
 import router from './router'
+import store from './store'
 
 import 'jquery'
 import 'popper.js'
@@ -14,8 +15,9 @@ import VueAxios from 'vue-axios'
 
 // require('./plugins/fontawesome');
 
-createApp(App)
-.use(router)
-.use(VuelidatePlugin)
-.use(VueAxios,axios)
-.mount('#app')
+const app = createApp(App)
+app.use(router)
+app.use(store)
+app.use(VuelidatePlugin)
+app.use(VueAxios,axios)
+app.mount('#app')
