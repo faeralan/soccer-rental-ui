@@ -21,9 +21,9 @@
                   v-model="$v.f.name.$model"
                 >
                 <div v-if="$v.f.name.$error && $v.f.name.$dirty" class="alert alert-danger mt-1">
-                  <div v-if="$v.f.name.required.$invalid">Este campo es requerido</div>
-                  <div v-if="$v.f.name.minLength.$invalid">Este campo debe tener al menos {{$v.f.name.minLength.$params.min}} caracteres</div>
-                  <div v-if="$v.f.name.maxLength.$invalid">Este campo debe tener máximo {{$v.f.name.maxLength.$params.max}} caracteres</div>
+                  <div v-if="$v.f.name.required.$invalid">- Este campo es requerido</div>
+                  <div v-if="$v.f.name.minLength.$invalid">- Este campo debe tener al menos {{$v.f.name.minLength.$params.min}} caracteres</div>
+                  <div v-if="$v.f.name.maxLength.$invalid">- Este campo debe tener máximo {{$v.f.name.maxLength.$params.max}} caracteres</div>
                 </div>
             </div>
 
@@ -36,9 +36,9 @@
                   v-model="$v.f.lastname.$model"
                 >
                 <div v-if="$v.f.lastname.$error && $v.f.lastname.$dirty" class="alert alert-danger mt-1">
-                  <div v-if="$v.f.lastname.required.$invalid">Este campo es requerido</div>
-                  <div v-if="$v.f.lastname.minLength.$invalid">Este campo debe tener al menos {{$v.f.lastname.minLength.$params.min}} caracteres</div>
-                  <div v-if="$v.f.lastname.maxLength.$invalid">Este campo debe tener máximo {{$v.f.lastname.maxLength.$params.max}} caracteres</div>
+                  <div v-if="$v.f.lastname.required.$invalid">- Este campo es requerido</div>
+                  <div v-if="$v.f.lastname.minLength.$invalid">- Este campo debe tener al menos {{$v.f.lastname.minLength.$params.min}} caracteres</div>
+                  <div v-if="$v.f.lastname.maxLength.$invalid">- Este campo debe tener máximo {{$v.f.lastname.maxLength.$params.max}} caracteres</div>
                 </div>
             </div>
 
@@ -51,8 +51,8 @@
                   v-model="$v.f.email.$model"
                 >
                 <div v-if="$v.f.email.$error && $v.f.email.$dirty" class="alert alert-danger mt-1">
-                  <div v-if="$v.f.email.required.$invalid">Este campo es requerido</div>
-                  <div v-if="$v.f.email.email.$invalid">Debe ser un email válido</div>
+                  <div v-if="$v.f.email.required.$invalid">- Este campo es requerido</div>
+                  <div v-if="$v.f.email.email.$invalid">- Debe ser un email válido</div>
                 </div>
             </div>
 
@@ -66,7 +66,7 @@
                   v-model="$v.f.phone.$model"
                 >
                 <div v-if="$v.f.phone.$error && $v.f.phone.$dirty" class="alert alert-danger mt-1">
-                  <div v-if="$v.f.phone.required.$invalid">Este campo es requerido</div>
+                  <div v-if="$v.f.phone.required.$invalid">- Este campo es requerido</div>
                 </div>
             </div>
                 
@@ -80,9 +80,9 @@
                   v-model="$v.f.password.$model"
                 >
                 <div v-if="$v.f.password.$error && $v.f.password.$dirty" class="alert alert-danger mt-1">
-                  <div v-if="$v.f.password.required.$invalid">Este campo es requerido</div>
-                  <div v-if="$v.f.password.minLength.$invalid">Este campo debe tener al menos {{$v.f.password.minLength.$params.min}} caracteres</div>
-                  <div v-if="$v.f.password.maxLength.$invalid">Este campo debe tener máximo {{$v.f.password.maxLength.$params.max}} caracteres</div>
+                  <div v-if="$v.f.password.required.$invalid">- Este campo es requerido</div>
+                  <div v-if="$v.f.password.minLength.$invalid">- Este campo debe tener al menos {{$v.f.password.minLength.$params.min}} caracteres</div>
+                  <div v-if="$v.f.password.maxLength.$invalid">- Este campo debe tener máximo {{$v.f.password.maxLength.$params.max}} caracteres</div>
                 </div>
             </div>
 
@@ -95,7 +95,7 @@
                   v-model="$v.f.passwordConfirm.$model"
                 >
                 
-                <div v-if="($v.f.passwordConfirm.$error && $v.f.passwordConfirm.$dirty) || ($v.f.passwordConfirm.$model != $v.f.password.$model)" class="alert alert-danger mt-1">
+                <div v-if="($v.f.passwordConfirm.$error && $v.f.passwordConfirm.$dirty) || ($v.f.passwordConfirm.$model != $v.f.password.$model && $v.f.passwordConfirm.$dirty)" class="alert alert-danger mt-1">
                   <div v-if="$v.f.passwordConfirm.required.$invalid">- Este campo es requerido.</div>
                   <div v-if="$v.f.passwordConfirm.$model != $v.f.password.$model">- Las contraseñas no coinciden.</div>
                 </div>
@@ -124,7 +124,7 @@
 </template>
 
 <script>
-import { required, sameAs, not, minLength, maxLength, email } from '@vuelidate/validators'
+import { required, minLength, maxLength, email } from '@vuelidate/validators'
 
   export default  {
     name: 'src-components-register-customer',
@@ -138,7 +138,8 @@ import { required, sameAs, not, minLength, maxLength, email } from '@vuelidate/v
     data () {
       return {
         f: this.resetForm(),
-        url : 'https://5f93837c8742070016da699e.mockapi.io/grupo-maravilla/register/'
+        //url : 'https://5f93837c8742070016da699e.mockapi.io/grupo-maravilla/register'
+        url : ''
       }
     },
     validations: {
@@ -166,15 +167,12 @@ import { required, sameAs, not, minLength, maxLength, email } from '@vuelidate/v
           maxLength: maxLength(16)
         },
         passwordConfirm: {
-          required,
-          sameAs,
-          not
+          required
         }
       }
     },
     methods: {
-      async sendDataFormAxios(data) {
-            
+      async sendDataFormAxios(data) {  
             try {
               if(data){
                 let res = await this.axios.post(this.url, data, {'content-type': 'application/json'})
@@ -183,15 +181,6 @@ import { required, sameAs, not, minLength, maxLength, email } from '@vuelidate/v
             }
             catch(error) {
               console.log('HTTP POST ERROR', error)
-            }
-        },
-        async getDataFormAxios() {
-            try {
-              let res = await this.axios(this.url)
-              console.log(res.data)
-            }
-            catch(error) {
-              console.log('HTTP GET ERROR', error)
             }
         },
         send() {
@@ -208,14 +197,15 @@ import { required, sameAs, not, minLength, maxLength, email } from '@vuelidate/v
               }
               console.log(form)
               this.sendDataFormAxios(form)
-                .then(() => {
-                  this.$router.push('/register-success')
+                .then(() => {                 
+                  this.f = this.resetForm()
+                  this.$v.$reset()
+                  this.$router.push('/register-success')     
                 })
                 .catch(() => {
                   console.log("HTTP POST ERROR")
                 })
-              this.f = this.resetForm()
-              this.$v.$reset()
+              
             }
         },
         resetForm() {
@@ -239,7 +229,7 @@ import { required, sameAs, not, minLength, maxLength, email } from '@vuelidate/v
 </script>
 
 <style scoped lang="css">
-  .src-components-register {
+  .src-components-register-customer {
     min-height: 600px;
     background: url(../assets/slide8.jpg);
     background-size: cover;

@@ -11,7 +11,7 @@
             <h4 class="text-black text-left ml-3">Iniciar Sesión</h4>
             <hr>
             <div class="form-group col-12">
-                <label for="username">Usuario</label>
+                <label for="username">Correo electrónico</label>
                 <input 
                   type="text"
                   id="username"
@@ -19,9 +19,7 @@
                   v-model="$v.f.username.$model"
                 >
                 <div v-if="$v.f.username.$error && $v.f.username.$dirty" class="alert alert-danger mt-1">
-                  <div v-if="$v.f.username.required.$invalid">Este campo es requerido</div>
-                  <div v-if="$v.f.username.minLength.$invalid">Este campo debe tener al menos {{$v.f.username.minLength.$params.min}} caracteres</div>
-                  <div v-if="$v.f.username.maxLength.$invalid">Este campo debe tener máximo {{$v.f.username.maxLength.$params.max}} caracteres</div>
+                  <div v-if="$v.f.username.required.$invalid">- Este campo es requerido</div>
                 </div>
             </div>
             <div class="form-group  col-12">
@@ -33,9 +31,8 @@
                   v-model="$v.f.password.$model"
                 >
                 <div v-if="$v.f.password.$error && $v.f.password.$dirty" class="alert alert-danger mt-1">
-                  <div v-if="$v.f.password.required.$invalid">Este campo es requerido</div>
-                  <div v-if="$v.f.password.minLength.$invalid">Este campo debe tener al menos {{$v.f.password.minLength.$params.min}} caracteres</div>
-                  <div v-if="$v.f.password.maxLength.$invalid">Este campo debe tener máximo {{$v.f.password.maxLength.$params.max}} caracteres</div>
+                  <div v-if="$v.f.password.required.$invalid">- Este campo es requerido</div>
+                  
                 </div>
             </div>
             <div class="form-group col-4">
@@ -67,7 +64,7 @@
 
 <script>
 
-import { required, minLength, maxLength } from '@vuelidate/validators'
+import { required } from '@vuelidate/validators'
 
   export default  {
     name: 'src-components-login-customer',
@@ -81,20 +78,16 @@ import { required, minLength, maxLength } from '@vuelidate/validators'
     data () {
       return {
           f: this.resetForm(),
-          url : 'http://127.0.0.1:3000/login'
+          url : 'https://evening-hollows-89542.herokuapp.com/login'
       }
     },
     validations: {
       f: {
         username: { 
-          required,
-          minLength: minLength(4),
-          maxLength: maxLength(32)
+          required
         },
         password: { 
-          required,
-          minLength: minLength(8),
-          maxLength: maxLength(16)
+          required
         }
       }
     },
@@ -124,7 +117,7 @@ import { required, minLength, maxLength } from '@vuelidate/validators'
             this.$v.$touch()
             if(!this.$v.$invalid) {
               let form = {
-                username: this.$v.f.username.$model,
+                email: this.$v.f.username.$model,
                 password: this.$v.f.password.$model,
                 owner: false
               }
