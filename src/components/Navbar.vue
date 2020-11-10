@@ -13,7 +13,7 @@
         </ul>
         <span class="navbar-text">
           <li class="nav-item">
-            <a class="nav-link login-btn mr-15" href="/register" :class="{change_btn: scrollPosition > 50}">Registrate</a>
+            <a class="nav-link login-btn mr-15" href="/register-customer" :class="{change_btn: scrollPosition > 50}">Registrate</a>
           </li>
         </span>
         <span class="navbar-text">

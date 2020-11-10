@@ -10,8 +10,11 @@
           <form novalidate autocomplete="off" class="p-3 mt-3 mb-3 text-left" @submit.prevent="send()">
             <h4 class="text-black text-left ml-3">Iniciar Sesión</h4>
             <hr>
+            <div v-if="error" class="alert alert-danger">
+              Los datos ingresados son incorrectos.
+            </div>
             <div class="form-group col-12">
-                <label for="username">Usuario</label>
+                <label for="username">Correo electrónico</label>
                 <input 
                   type="text"
                   id="username"
@@ -19,9 +22,7 @@
                   v-model="$v.f.username.$model"
                 >
                 <div v-if="$v.f.username.$error && $v.f.username.$dirty" class="alert alert-danger mt-1">
-                  <div v-if="$v.f.username.required.$invalid">Este campo es requerido</div>
-                  <div v-if="$v.f.username.minLength.$invalid">Este campo debe tener al menos {{$v.f.username.minLength.$params.min}} caracteres</div>
-                  <div v-if="$v.f.username.maxLength.$invalid">Este campo debe tener máximo {{$v.f.username.maxLength.$params.max}} caracteres</div>
+                  <div v-if="$v.f.username.required.$invalid">- Este campo es requerido</div>
                 </div>
             </div>
             <div class="form-group  col-12">
@@ -33,9 +34,8 @@
                   v-model="$v.f.password.$model"
                 >
                 <div v-if="$v.f.password.$error && $v.f.password.$dirty" class="alert alert-danger mt-1">
-                  <div v-if="$v.f.password.required.$invalid">Este campo es requerido</div>
-                  <div v-if="$v.f.password.minLength.$invalid">Este campo debe tener al menos {{$v.f.password.minLength.$params.min}} caracteres</div>
-                  <div v-if="$v.f.password.maxLength.$invalid">Este campo debe tener máximo {{$v.f.password.maxLength.$params.max}} caracteres</div>
+                  <div v-if="$v.f.password.required.$invalid">- Este campo es requerido</div>
+                  
                 </div>
             </div>
             <div class="form-group col-4">
@@ -51,7 +51,7 @@
           
           </form>
           <div class="text-center">
-                <a class="reg-link" href="/register">¿Aún no estás registrado? Registrate acá.</a>            
+                <a class="reg-link" href="/register-customer">¿Aún no estás registrado? Registrate acá.</a>            
           </div>
           <br>
           <div class="text-center mb-3">
@@ -67,7 +67,7 @@
 
 <script>
 
-import { required, minLength, maxLength } from '@vuelidate/validators'
+import { required } from '@vuelidate/validators'
 
   export default  {
     name: 'src-components-login-customer',
@@ -81,59 +81,42 @@ import { required, minLength, maxLength } from '@vuelidate/validators'
     data () {
       return {
           f: this.resetForm(),
-          url : 'https://5f93837c8742070016da699e.mockapi.io/grupo-maravilla/login-customer'
+          url : 'https://evening-hollows-89542.herokuapp.com/login',
+          error: false
       }
     },
     validations: {
       f: {
         username: { 
-          required,
-          minLength: minLength(4),
-          maxLength: maxLength(16)
+          required
         },
         password: { 
-          required,
-          minLength: minLength(8),
-          maxLength: maxLength(16)
+          required
         }
       }
     },
     methods: {
-        async sendDataFormAxios(data) {
-            
-            try {
-              if(data){
-                let res = await this.axios.post(this.url, data, {'content-type': 'application/json'})
-                console.log(res.data)
+        sendDataFormAxios(data) {   
+          this.axios.post(this.url, data, {'content-type': 'application/json'})
+            .then(res => {
+              if (res.data) {
+                this.$router.push('/home')
               }
-            }
-            catch(error) {
-              console.log('HTTP POST ERROR', error)
-            }
-        },
-        async getDataFormAxios() {
-            try {
-              let res = await this.axios(this.url)
-              console.log(res.data)
-            }
-            catch(error) {
-              console.log('HTTP GET ERROR', error)
-            }
+            })
+            .catch(error => {
+              console.log(error)
+              this.error = true             
+            })
         },
         send() {
             this.$v.$touch()
             if(!this.$v.$invalid) {
               let form = {
-                username: this.$v.f.username.$model,
+                email: this.$v.f.username.$model,
                 password: this.$v.f.password.$model,
+                owner: false
               }
-              console.log(form)
               this.sendDataFormAxios(form)
-                .then(() => {
-                  this.$router.push('/home')
-                })
-              this.f = this.resetForm()
-              this.$v.$reset()
             }
         },
         resetForm() {

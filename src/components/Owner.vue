@@ -13,7 +13,7 @@
         </div>
         <div class="col-md-4">
           <div class="col-md-12">
-            <a class="btn-owner" href="/register">Sumate</a>
+            <a class="btn-owner" href="/register-owner">Sumate</a>
           </div>
           <br>
           <div class="col-md-12">
