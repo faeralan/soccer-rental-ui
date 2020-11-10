@@ -102,7 +102,7 @@ import { required } from '@vuelidate/validators'
             .then(res => {
               if (res.data) {
                 sessionStorage.setItem('owner',res.data.token)
-                this.$store.dispatch('getStatusOwner', true);
+                this.$store.dispatch('getStatusOwner', res.data.token);
                 this.$router.push('/admin/index')
               }
             })

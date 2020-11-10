@@ -3,7 +3,7 @@ import { createStore } from 'vuex'
 export default createStore({
     state(){
         return {
-            isLoggedOwner: sessionStorage.getItem('owner') ? true : false,
+            isLoggedOwner: sessionStorage.getItem('owner') ? sessionStorage.getItem('owner') : false,
             isLoggedCustomer: sessionStorage.getItem('customer') ? sessionStorage.getItem('customer') : false
         }
     },
