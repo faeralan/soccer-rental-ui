@@ -184,14 +184,12 @@
         this.maxDate = new Date(d).toISOString().split('T')[0]        
       },
       async sendDatosForm(form) {
-        
         try {
-          const headers = {
-            'Authorization' : `Bearer ${this.$store.state.isLoggedCustomer}`,
-           'Content-Type': 'application/json'
-        }
-        console.log(headers);
-        let data = await this.axios.get(this.url, form, headers);
+          let data = await this.axios.get(this.url, { headers: {
+              'Authorization' : `Bearer ${this.$store.state.isLoggedCustomer}`,
+              'Content-Type': 'application/json'
+            }, params: form
+          });
           this.loading = false;
           this.results = data.data;
           console.log(this.results)
