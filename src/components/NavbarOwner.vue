@@ -23,7 +23,7 @@
         </span>
         <span class="navbar-text">
           <li class="nav-item">
-            <a class="nav-link login-btn" href="/logout-owner">Cerrar Sesión</a>
+            <a class="nav-link login-btn" href="#" @click="logout()">Cerrar Sesión</a>
           </li>
         </span>
       </div>
@@ -46,7 +46,11 @@
       }
     },
     methods: {
-
+      logout(){
+          sessionStorage.removeItem('owner')
+          this.$store.dispatch('getStatusOwner', false);
+          this.$router.push('/')
+       }
     },
     computed: {
       

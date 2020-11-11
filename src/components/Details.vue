@@ -82,8 +82,7 @@ export default {
   },
   data() {
     return {
-      url:
-        "https://5f9509db2de5f50016ca1c9d.mockapi.io/api/v1/courts/" + this.id,
+      url:"https://evening-hollows-89542.herokuapp.com/courts",
       court: [],
       loading: true,
     };
@@ -91,11 +90,11 @@ export default {
   methods: {
     async getDatos() {
       try {
-        const headers = {
-          'Content-Type': 'application/json',
-          'Authorization': 'Bearer'+this.$store.state.isLoggedCustomer
-        }
-        let data = await this.axios.get(this.url, headers);
+        let data = await this.axios.get(this.url, { headers: {
+              'Authorization' : `Bearer ${this.$store.state.isLoggedCustomer}`,
+              'Content-Type': 'application/json'
+            }, params: {'id':this.id}
+          });
         this.loading = false;
         this.court = data.data;
       } catch (error) {

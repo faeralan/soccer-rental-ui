@@ -7,13 +7,15 @@
           v-for="(court, i) in resultados"
           :key="i"
         >
+        
           <div class="col-2">
-            <img :src="court.image" class="img-fluid" alt="" />
+            <img v-if="!court.image" src="../assets/court_example.jpg" class="img-fluid" alt="" />
+            <img v-else-if="court.image" :src="court.image" class="img-fluid" alt="" />
           </div>
           <div class="col-10">
             <div class="row">
               <div class="col-xs-12 col-sm-10">
-                <h4 class="title_court">{{ toUpperCase(court.title) }}</h4>
+                <h4 class="title_court">{{ toUpperCase(court.name) }}</h4>
               </div>
               <div class="col-xs-12 col-sm-2">
                 <p class="price_court">
@@ -33,10 +35,16 @@
             </div>
             <div class="row">
               <div class="col-xs-12 offset-sm-9 col-sm-3 p-right">
-                <a class="reservar" @click="redirect(court.id)">Reservar</a>
+                <a class="reservar" @click="redirect(court._id)">Reservar</a>
               </div>
             </div>
           </div>
+        </div>
+      </div>
+      
+      <div v-else-if="resultados === false" class="row">
+        <div class="col-12 d-flex justify-content-center  alert alert-danger">
+          No se encontraron canchas disponibles!
         </div>
       </div>
     </div>
@@ -81,6 +89,7 @@ export default {
 .jumbotron:hover {
   background-color: #eee !important;
 }
+
 .title_court {
   float: left;
 }

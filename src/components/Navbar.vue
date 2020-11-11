@@ -2,7 +2,7 @@
 
   <section class="src-components-navbar">
     <nav v-if="!$store.state.isLoggedCustomer" class="navbar fixed-top navbar-expand-lg navbar-light bg-info" :class="{change_color: scrollPosition > 50}">
-      <a class="font-italic navbar-brand" href="#" :class="{change_color: scrollPosition > 50}">Juego Limpio</a>
+      <a class="font-italic navbar-brand" href="/" :class="{change_color: scrollPosition > 50}">Juego Limpio</a>
       <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarText" aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
@@ -26,7 +26,7 @@
 
 
     <nav v-else-if="$store.state.isLoggedCustomer" class="navbar fixed-top navbar-expand-lg navbar-light bg-info" :class="{change_color: scrollPosition > 50}">
-      <a class="font-italic navbar-brand" href="#" :class="{change_color: scrollPosition > 50}">Juego Limpio</a>
+      <a class="font-italic navbar-brand" href="/" :class="{change_color: scrollPosition > 50}">Juego Limpio</a>
       <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarText" aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
@@ -35,9 +35,14 @@
           
           
         </ul>
+        <!-- <span class="navbar-text">
+          <li class="nav-item">
+            <a class="nav-link login-btn" href="/profile" :class="{change_btn: scrollPosition > 50}">Mi Perfil</a>
+          </li>
+        </span> -->
         <span class="navbar-text">
           <li class="nav-item">
-            <a class="nav-link login-btn" href="/login-customer" :class="{change_btn: scrollPosition > 50}">Cerrar Sesión</a>
+            <a class="nav-link login-btn" href="#" @click="logout()" :class="{change_btn: scrollPosition > 50}">Cerrar Sesión</a>
           </li>
         </span>
       </div>
@@ -64,7 +69,11 @@
          this.scrollPosition = window.scrollY
         //  console.log(this.scrollPosition)
        },
-       
+       logout(){
+         sessionStorage.removeItem('customer')
+          this.$store.dispatch('getStatusCustomer', false);
+          this.$router.push('/')
+       }
       
     },
     computed: {

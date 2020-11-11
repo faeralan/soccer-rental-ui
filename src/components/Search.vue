@@ -37,10 +37,15 @@
                           </select>
                       </div>
                     </div>
+
+                    <div v-if="($v.f.date.$error && $v.f.date.$dirty) || error" class="alert alert-danger mt-1">
+                      <div v-if="$v.f.date.required.$invalid">Por favor complete todos los campos</div>
+                      <div v-else-if="error">La fecha ingresada debe ser mayor a la actual</div>
+                    </div>
                   </div>
 
                   <div class="form-group">
-                    <input class="btn btn-color btn-md" type="submit" value="Buscar" >
+                    <input class="btn btn-color btn-md" type="submit" value="Buscar" :disabled="$v.f.$invalid">
                   </div>
                 </form>
             </div>
@@ -154,10 +159,12 @@
         results: [],
         f: {
           date: new Date(Date.now()).toISOString().split('T')[0],
+          // date: null,
           players: '5',
           hour: '08',
           neighborhood: 'Agronomía'
-        }
+        },
+        error: false
       }
     },
     validations: {
@@ -191,26 +198,62 @@
             }, params: form
           });
           this.loading = false;
-          this.results = data.data;
-          console.log(this.results)
+          // console.log(data);
+          const courts = Object.assign({}, data);
+          if(courts.data.length > 0){
+            this.results = courts.data;
+          }else{
+            this.results = false
+          }
+          // console.log(this.results)
         } catch (error) {
           console.error(error)
         }
       },
       enviar(){
+        this.error = false;
         this.$v.$touch()
-        if(!this.$v.$invalid) {
+        let timestamp = this.convertToTimestamp(this.$v.f.date.$model,this.$v.f.hour.$model)
+        
+        let date = new Date();
+        let day=date.getDate();
+        let month=date.getMonth();
+        let year=date.getFullYear();
+        let hour = date.getHours();
+
+        let actual=year+"-"+(month+1)+"-"+day;
+        // console.log(hour);
+        
+
+        if(actual == this.$v.f.date.$model && this.$v.f.hour.$model <= hour){
+          this.error = true;
+        }else if(!this.$v.$invalid) {
+          
           let form = {
             players: this.$v.f.players.$model,
             neighborhood: this.$v.f.neighborhood.$model,
-            date: 1604916000
+            date: timestamp
           }
           this.loading = true;
-          console.log(form)
-          this.sendDatosForm(form)
+          this.sendDatosForm(form);
         }
         
         
+      },
+      convertToTimestamp(date, hour){
+        let aux = date.split("-");
+        // console.log(aux);
+        let timestamp = this.toTimestamp(aux[0],aux[1],aux[2],hour)
+        // let localTime = timestamp + 3*60*60;
+        // console.log(timestamp);
+        // console.log(localTime);
+
+        return timestamp
+
+      },
+      toTimestamp(year,month,day,hour){
+        let datum = new Date(Date.UTC(year,month-1,day,hour));
+        return datum.getTime()/1000;
       }
 
     },
