@@ -35,11 +35,12 @@
           
           
         </ul>
-        <!-- <span class="navbar-text">
-          <li class="nav-item">
+        <span class="navbar-text">
+          <li class="nav-item mr-15">
             <a class="nav-link login-btn" href="/profile" :class="{change_btn: scrollPosition > 50}">Mi Perfil</a>
           </li>
-        </span> -->
+        </span>
+
         <span class="navbar-text">
           <li class="nav-item">
             <a class="nav-link login-btn" href="#" @click="logout()" :class="{change_btn: scrollPosition > 50}">Cerrar Sesión</a>

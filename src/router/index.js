@@ -10,6 +10,7 @@ import Details from '../components/Details.vue'
 import Confirmation from '../components/Confirmation.vue'
 import PanelOwners from '../components/PanelOwners.vue'
 import CreateCourt from '../components/CreateCourt.vue'
+import ProfileCustomer from '../components/ProfileCustomer.vue'
 
 const routes = [
     { path: '/', name: 'Index', component: Index },
@@ -19,10 +20,12 @@ const routes = [
     { path: '/register-owner', name: 'RegisterOwner', component: RegisterOwner },
     { path: '/register-customer', name: 'RegisterCustomer', component: RegisterCustomer },
     { path: '/register-success', name: 'RegisterSuccess', component: RegisterSuccess },
-    { path: '/details/:id', name: 'Details', component: Details, props: true },
+    { path: '/details/:id/:date', name: 'Details', component: Details, props: true },
     { path: '/confirmation', name: 'Confirmation', component: Confirmation},
     { path: '/admin/index', name: 'PanelOwners', component: PanelOwners},
     { path: '/admin/create-court', name: 'CreateCourt', component: CreateCourt}
+    { path: '/profile', name: 'ProfileCustomer', component: ProfileCustomer},
+    { path: '/:catchAll(.*)', name: 'NotFound', component: Index}
 ]
 
 const router = createRouter({

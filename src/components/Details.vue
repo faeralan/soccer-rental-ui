@@ -8,11 +8,12 @@
           <Spinner v-if="loading" />
 
           <div class="col col-sm-3">
-            <img :src="court.image" class="img-fluid" alt="" />
+            <img v-if="!court.image" src="../assets/court_example.jpg" class="img-fluid" alt="" />
+            <img v-else-if="court.image" :src="court.image" class="img-fluid" alt="" />
           </div>
           <div class="col col-sm-9">
             <div class="col-12">
-              <h4>{{ court.title }}</h4>
+              <h4>{{ court.name }}</h4>
             </div>
             <hr />
             <div class="row">
@@ -66,7 +67,7 @@ import Footer from "./Footer.vue";
 import mixins from "../mixins";
 export default {
   name: "src-components-details",
-  props: ["id"],
+  props: ["id","date"],
   mixins: [mixins],
   components: {
     Navbar,
@@ -82,7 +83,8 @@ export default {
   },
   data() {
     return {
-      url:"https://evening-hollows-89542.herokuapp.com/courts",
+      url:"https://evening-hollows-89542.herokuapp.com/courts/"+this.id,
+      url_reservation:"https://evening-hollows-89542.herokuapp.com/reservations",
       court: [],
       loading: true,
     };
@@ -93,27 +95,35 @@ export default {
         let data = await this.axios.get(this.url, { headers: {
               'Authorization' : `Bearer ${this.$store.state.isLoggedCustomer}`,
               'Content-Type': 'application/json'
-            }, params: {'id':this.id}
+            }
           });
         this.loading = false;
+        const mycourt = Object.assign({}, data);
+        console.log(mycourt)
         this.court = data.data;
       } catch (error) {
         console.error(error);
       }
     },
-    reservar() {
-      //tiene que ser async await
-      /*try {
-          if(data){
-            let res = await this.axios.post(this.url, data, {'content-type': 'application/json'})
-            console.log(res.data)
+    async reservar() {
+      
+      try {
+          const data = {
+            'court': this.id,
+            'date': this.date
           }
+          
+          let res = await this.axios.post(this.url_reservation, data, { headers: {
+              'Authorization' : `Bearer ${this.$store.state.isLoggedCustomer}`,
+              'Content-Type': 'application/json'
+            }})
+          console.log(res.data)
+          
         }
         catch(error) {
           console.log('HTTP POST ERROR', error)
         }
-        */
-       this.$router.push('/confirmation')
+      this.$router.push('/confirmation')
     },
   },
   computed: {},

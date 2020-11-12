@@ -55,9 +55,11 @@
 import mixins from "../mixins";
 export default {
   name: "src-components-court",
-  props: ["resultados"],
+  props: ["resultados","date"],
   mixins: [mixins],
-  updated() {},
+  updated() {
+    console.log(this.date)
+  },
 
   data() {
     return {};
@@ -68,6 +70,7 @@ export default {
         name: "Details",
         params: {
           id: _id,
+          date: this.date
         },
       });
     },

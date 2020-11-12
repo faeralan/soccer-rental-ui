@@ -54,7 +54,7 @@
       </div>
     </div>
     <Spinner v-if="loading" />
-    <Court :resultados="results"/>
+    <Court :resultados="results" :date="reserv_date"/>
   </section>
 
 </template>
@@ -63,6 +63,7 @@
   import Court from './Court.vue'
   import Spinner from './Spinner.vue'
   import { required } from '@vuelidate/validators'
+  
 
   export default  {
     name: 'src-components-search',
@@ -157,6 +158,7 @@
           {'value':'Vélez Sarsfield','name':'Vélez Sarsfield'}
         ],
         results: [],
+        reserv_date: null,
         f: {
           date: new Date(Date.now()).toISOString().split('T')[0],
           // date: null,
@@ -228,7 +230,7 @@
         if(actual == this.$v.f.date.$model && this.$v.f.hour.$model <= hour){
           this.error = true;
         }else if(!this.$v.$invalid) {
-          
+          this.reserv_date = timestamp;
           let form = {
             players: this.$v.f.players.$model,
             neighborhood: this.$v.f.neighborhood.$model,
