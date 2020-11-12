@@ -82,7 +82,7 @@ export default {
     },
     data() {
         return {
-            url: "https://evening-hollows-89542.herokuapp.com/courts/owner",
+            url: "https://evening-hollows-89542.herokuapp.com/courts/",
             loading: true,
             results: []
         }
@@ -90,7 +90,7 @@ export default {
     methods: {
         async getDatos() {
             try {
-                let data = await this.axios.get(this.url, {
+                let data = await this.axios.get(this.url + "owner", {
                     headers: {
                         'Authorization': `Bearer ${this.$store.state.isLoggedOwner}`,
                         'Content-Type': 'application/json'
@@ -111,8 +111,20 @@ export default {
         updateCourt() {
             return null
         },
-        deleteCourt() {
-            return null
+        async deleteCourt(courtId) {
+            try {
+                let data = await this.axios.delete(this.url + courtId, {
+                    headers: {
+                        'Authorization': `Bearer ${this.$store.state.isLoggedOwner}`,
+                        'Content-Type': 'application/json'
+                    }
+                })
+                console.log(data.data)
+                this.loading = false;
+                this.$router.push('/admin/index')
+            } catch (error) {
+                console.error(error);
+            }
         }
     },
     computed: {

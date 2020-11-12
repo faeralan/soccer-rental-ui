@@ -160,7 +160,7 @@
                         </select>
 
                         <div class="alert alert-danger mt-1" v-if="($v.f.closehours.$model <= $v.f.openhours.$model) && ($v.f.closehours.$model)">- El horario de cierre debe ser posterior al horario de apertura</div>
-
+                        <div class="alert alert-danger mt-1" v-if="$v.f.dayError.$model">- Debe completar todos los campos correspondientes al día</div>
                         <div class="btn btn-success col-4 mt-1" @click="addDayAndHours()">Agregar</div>
 
                         <div class="mt-1 rounded alert-info p-2" v-if="Object.keys(calendar).length !== 0">
@@ -211,6 +211,7 @@ export default {
             f: this.resetForm(),
             url: 'https://evening-hollows-89542.herokuapp.com/courts',
             error: false,
+            dayError: false,
             services: [],
             calendar: {},
             barrios: [{
@@ -434,13 +435,14 @@ export default {
 
             },
             calendar: {
-                required
+
             },
             days: {
 
             },
             openhours: {},
-            closehours: {}
+            closehours: {},
+            dayError: {}
         }
     },
     methods: {
@@ -509,10 +511,14 @@ export default {
             let day = this.$v.f.days.$model
             let openhours = this.$v.f.openhours.$model
             let closehours = this.$v.f.closehours.$model
-
-            this.calendar[day] = {}
-            this.calendar[day].from = parseInt(openhours)
-            this.calendar[day].to = parseInt(closehours)
+            if (closehours > openhours && day != '') {
+                this.dayError = false
+                this.calendar[day] = {}
+                this.calendar[day].from = parseInt(openhours)
+                this.calendar[day].to = parseInt(closehours)
+            } else {
+                this.dayError = true
+            }
 
         },
         deleteService(index) {
