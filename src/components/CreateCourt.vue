@@ -32,6 +32,7 @@
                             <option value="7">7</option>
                             <option value="8">8</option>
                             <option value="9">9</option>
+                            <option value="10">10</option>
                             <option value="11">11</option>
                         </select>
                     </div>
@@ -77,9 +78,14 @@
                         <div class="btn btn-success col-4 mt-1" @click="addService()">Agregar</div>
 
                         <div class="mt-1 rounded alert-info p-2" v-if="services.length > 0">
-                            <p v-for="(service, i) in services" :key="i">
-                                ▪ {{ toUpperCase(service) }}
-                            </p>
+                            <div v-for="(service, i) in services" :key="i">
+
+                                <div>
+                                    <p class="service-name">▪ {{ toUpperCase(service) }} - </p>
+                                    <p @click="deleteService(i)" class="delete-service ml-1">Eliminar</p>
+                                </div>
+
+                            </div>
                         </div>
 
                     </div>
@@ -88,7 +94,7 @@
 
                         <label for="days">Días y horarios</label>
                         <select v-model="$v.f.days.$model" id="days" class="form-control">
-                            <option value="monday">Lunes</option>
+                            <option value="monday" selected="selected">Lunes</option>
                             <option value="tuesday">Martes</option>
                             <option value="wednesday">Miércoles</option>
                             <option value="thursday">Jueves</option>
@@ -98,7 +104,7 @@
                         </select>
 
                         <label for="openhours">Horario de apertura</label>
-                        <select id="openhours" class="form-control" v-model="$v.f.openhours.$model">
+                        <select id="openhours" class="form-control" value="8" v-model="$v.f.openhours.$model">
                             <option value="0">00:00</option>
                             <option value="1">01:00</option>
                             <option value="2">02:00</option>
@@ -107,7 +113,7 @@
                             <option value="5">05:00</option>
                             <option value="6">06:00</option>
                             <option value="7">07:00</option>
-                            <option value="8">08:00</option>
+                            <option value="8" selected>08:00</option>
                             <option value="9">09:00</option>
                             <option value="10">10:00</option>
                             <option value="11">11:00</option>
@@ -150,15 +156,18 @@
                             <option value="20">20:00</option>
                             <option value="21">21:00</option>
                             <option value="22">22:00</option>
-                            <option value="23">23:00</option>
+                            <option value="23" selected="selected">23:00</option>
                         </select>
+
+                        <div class="alert alert-danger mt-1" v-if="($v.f.closehours.$model <= $v.f.openhours.$model) && ($v.f.closehours.$model)">- El horario de cierre debe ser posterior al horario de apertura</div>
 
                         <div class="btn btn-success col-4 mt-1" @click="addDayAndHours()">Agregar</div>
 
                         <div class="mt-1 rounded alert-info p-2" v-if="Object.keys(calendar).length !== 0">
-                            <p v-for="(item, i) in calendar" :key="i">
-                                ▪ {{ toUpperCase(i) }}: {{ item.from }} hs - {{ item.to}} hs
-                            </p>
+                            <div v-for="(item, i) in calendar" :key="i">
+                                <p class="day-name">▪ {{ toUpperCase(i) }}: {{ item.from }} hs - {{ item.to}} hs</p>
+                            </div>
+                            <p @click="deleteDay()" class="delete-day ml-1">Eliminar</p>
                         </div>
 
                     </div>
@@ -204,55 +213,198 @@ export default {
             error: false,
             services: [],
             calendar: {},
-            barrios: [
-                {'value':'Agronomía','name':'Agronomía'},
-                {'value':'Almagro','name':'Almagro'},
-                {'value':'Balvanera','name':'Balvanera'},
-                {'value':'Barracas','name':'Barracas'},
-                {'value':'Belgrano','name':'Belgrano'},
-                {'value':'Boedo','name':'Boedo'},
-                {'value':'Caballito','name':'Caballito'},
-                {'value':'Chacarita','name':'Chacarita'},
-                {'value':'Coghlan','name':'Coghlan'},
-                {'value':'Colegiales','name':'Colegiales'},
-                {'value':'Constitución','name':'Constitución'},
-                {'value':'Flores','name':'Flores'},
-                {'value':'Floresta','name':'Floresta'},
-                {'value':'La Boca','name':'La Boca'},
-                {'value':'La Paternal','name':'La Paternal'},
-                {'value':'Liniers','name':'Liniers'},
-                {'value':'Mataderos','name':'Mataderos'},
-                {'value':'Monte Castro','name':'Monte Castro'},
-                {'value':'Montserrat','name':'Montserrat'},
-                {'value':'Nueva Pompeya','name':'Nueva Pompeya'},
-                {'value':'Nuñez','name':'Nuñez'},
-                {'value':'Palermo','name':'Palermo'},
-                {'value':'Parque Avellaneda','name':'Parque Avellaneda'},
-                {'value':'Parque Chacabuco','name':'Parque Chacabuco'},
-                {'value':'Parque Chas','name':'Parque Chas'},
-                {'value':'Parque Patricios','name':'Parque Patricios'},
-                {'value':'Puerto Madero','name':'Puerto Madero'},
-                {'value':'Recoleta','name':'Recoleta'},
-                {'value':'Retiro','name':'Retiro'},
-                {'value':'Saavedra','name':'Saavedra'},
-                {'value':'San Cristóbal','name':'San Cristóbal'},
-                {'value':'San Nicolás','name':'San Nicolás'},
-                {'value':'San Telmo','name':'San Telmo'},
-                {'value':'Versalles','name':'Versalles'},
-                {'value':'Villa Crespo','name':'Villa Crespo'},
-                {'value':'Villa Devoto','name':'Villa Devoto'},
-                {'value':'Villa General Mitre','name':'Villa General Mitre'},
-                {'value':'Villa Lugano','name':'Villa Lugano'},
-                {'value':'Villa Luro','name':'Villa Luro'},
-                {'value':'Villa Ortúzar','name':'Villa Ortúzar'},
-                {'value':'Villa Pueyrredón','name':'Villa Pueyrredón'},
-                {'value':'Villa Real','name':'Villa Real'},
-                {'value':'Villa Riachuelo','name':'Villa Riachuelo'},
-                {'value':'Villa Santa Rita','name':'Villa Santa Rita'},
-                {'value':'Villa Soldati','name':'Villa Soldati'},
-                {'value':'Villa Urquiza','name':'Villa Urquiza'},
-                {'value':'Villa del Parque','name':'Villa del Parque'},
-                {'value':'Vélez Sarsfield','name':'Vélez Sarsfield'}
+            barrios: [{
+                    'value': 'Agronomía',
+                    'name': 'Agronomía'
+                },
+                {
+                    'value': 'Almagro',
+                    'name': 'Almagro'
+                },
+                {
+                    'value': 'Balvanera',
+                    'name': 'Balvanera'
+                },
+                {
+                    'value': 'Barracas',
+                    'name': 'Barracas'
+                },
+                {
+                    'value': 'Belgrano',
+                    'name': 'Belgrano'
+                },
+                {
+                    'value': 'Boedo',
+                    'name': 'Boedo'
+                },
+                {
+                    'value': 'Caballito',
+                    'name': 'Caballito'
+                },
+                {
+                    'value': 'Chacarita',
+                    'name': 'Chacarita'
+                },
+                {
+                    'value': 'Coghlan',
+                    'name': 'Coghlan'
+                },
+                {
+                    'value': 'Colegiales',
+                    'name': 'Colegiales'
+                },
+                {
+                    'value': 'Constitución',
+                    'name': 'Constitución'
+                },
+                {
+                    'value': 'Flores',
+                    'name': 'Flores'
+                },
+                {
+                    'value': 'Floresta',
+                    'name': 'Floresta'
+                },
+                {
+                    'value': 'La Boca',
+                    'name': 'La Boca'
+                },
+                {
+                    'value': 'La Paternal',
+                    'name': 'La Paternal'
+                },
+                {
+                    'value': 'Liniers',
+                    'name': 'Liniers'
+                },
+                {
+                    'value': 'Mataderos',
+                    'name': 'Mataderos'
+                },
+                {
+                    'value': 'Monte Castro',
+                    'name': 'Monte Castro'
+                },
+                {
+                    'value': 'Montserrat',
+                    'name': 'Montserrat'
+                },
+                {
+                    'value': 'Nueva Pompeya',
+                    'name': 'Nueva Pompeya'
+                },
+                {
+                    'value': 'Nuñez',
+                    'name': 'Nuñez'
+                },
+                {
+                    'value': 'Palermo',
+                    'name': 'Palermo'
+                },
+                {
+                    'value': 'Parque Avellaneda',
+                    'name': 'Parque Avellaneda'
+                },
+                {
+                    'value': 'Parque Chacabuco',
+                    'name': 'Parque Chacabuco'
+                },
+                {
+                    'value': 'Parque Chas',
+                    'name': 'Parque Chas'
+                },
+                {
+                    'value': 'Parque Patricios',
+                    'name': 'Parque Patricios'
+                },
+                {
+                    'value': 'Puerto Madero',
+                    'name': 'Puerto Madero'
+                },
+                {
+                    'value': 'Recoleta',
+                    'name': 'Recoleta'
+                },
+                {
+                    'value': 'Retiro',
+                    'name': 'Retiro'
+                },
+                {
+                    'value': 'Saavedra',
+                    'name': 'Saavedra'
+                },
+                {
+                    'value': 'San Cristóbal',
+                    'name': 'San Cristóbal'
+                },
+                {
+                    'value': 'San Nicolás',
+                    'name': 'San Nicolás'
+                },
+                {
+                    'value': 'San Telmo',
+                    'name': 'San Telmo'
+                },
+                {
+                    'value': 'Versalles',
+                    'name': 'Versalles'
+                },
+                {
+                    'value': 'Villa Crespo',
+                    'name': 'Villa Crespo'
+                },
+                {
+                    'value': 'Villa Devoto',
+                    'name': 'Villa Devoto'
+                },
+                {
+                    'value': 'Villa General Mitre',
+                    'name': 'Villa General Mitre'
+                },
+                {
+                    'value': 'Villa Lugano',
+                    'name': 'Villa Lugano'
+                },
+                {
+                    'value': 'Villa Luro',
+                    'name': 'Villa Luro'
+                },
+                {
+                    'value': 'Villa Ortúzar',
+                    'name': 'Villa Ortúzar'
+                },
+                {
+                    'value': 'Villa Pueyrredón',
+                    'name': 'Villa Pueyrredón'
+                },
+                {
+                    'value': 'Villa Real',
+                    'name': 'Villa Real'
+                },
+                {
+                    'value': 'Villa Riachuelo',
+                    'name': 'Villa Riachuelo'
+                },
+                {
+                    'value': 'Villa Santa Rita',
+                    'name': 'Villa Santa Rita'
+                },
+                {
+                    'value': 'Villa Soldati',
+                    'name': 'Villa Soldati'
+                },
+                {
+                    'value': 'Villa Urquiza',
+                    'name': 'Villa Urquiza'
+                },
+                {
+                    'value': 'Villa del Parque',
+                    'name': 'Villa del Parque'
+                },
+                {
+                    'value': 'Vélez Sarsfield',
+                    'name': 'Vélez Sarsfield'
+                }
             ]
         }
     },
@@ -282,7 +434,7 @@ export default {
 
             },
             calendar: {
-
+                required
             },
             days: {
 
@@ -363,6 +515,12 @@ export default {
             this.calendar[day].to = parseInt(closehours)
 
         },
+        deleteService(index) {
+            this.services.splice(index, 1)
+        },
+        deleteDay() {
+            this.calendar = {}
+        }
 
     },
     computed: {
@@ -401,5 +559,31 @@ form h4 {
 .reg-link:hover {
     color: rgb(255, 255, 255);
     text-decoration: none;
+}
+
+.service-name {
+    display: inline-block;
+}
+
+.delete-service {
+    cursor: pointer;
+    display: inline-block;
+}
+
+.delete-service:hover {
+    text-decoration: underline;
+}
+
+.day-name {
+    display: inline-block;
+}
+
+.delete-day {
+    cursor: pointer;
+    display: inline-block;
+}
+
+.delete-day:hover {
+    text-decoration: underline;
 }
 </style>
