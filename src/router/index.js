@@ -10,6 +10,7 @@ import Details from '../components/Details.vue'
 import Confirmation from '../components/Confirmation.vue'
 import PanelOwners from '../components/PanelOwners.vue'
 import CreateCourt from '../components/CreateCourt.vue'
+import EditCourt from '../components/EditCourt.vue'
 import ProfileCustomer from '../components/ProfileCustomer.vue'
 import OwnerReservation from '../components/OwnerReservation.vue'
 import EditOwner from '../components/EditOwner.vue'
@@ -26,6 +27,7 @@ const routes = [
     { path: '/confirmation', name: 'Confirmation', component: Confirmation},
     { path: '/admin/index', name: 'PanelOwners', component: PanelOwners},
     { path: '/admin/create-court', name: 'CreateCourt', component: CreateCourt},
+    { path: '/admin/edit-court/:court_id', name: 'EditCourt', component: EditCourt, props: true},
     { path: '/admin/edit-owner', name: 'EditOwner', component: EditOwner},
     { path: '/admin/reservas', name: 'OwnerReservation', component: OwnerReservation},
     { path: '/profile', name: 'ProfileCustomer', component: ProfileCustomer},

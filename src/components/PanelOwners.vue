@@ -108,8 +108,8 @@ export default {
                 console.error(error);
             }
         },
-        updateCourt() {
-            return null
+        updateCourt(id) {
+            this.$router.push('/admin/edit-court/'+id)
         },
         async deleteCourt(courtId) {
             try {
