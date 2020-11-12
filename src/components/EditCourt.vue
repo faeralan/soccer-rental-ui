@@ -18,17 +18,17 @@
                       </div>
                       <div class="form-group col-12">
                           <label for="name">Nombre</label>
-                          <input type="text" id="name" class="form-control" v-model="$v.f.name.$model">
-                          <div v-if="$v.f.name.$error && $v.f.name.$dirty" class="alert alert-danger mt-1">
-                              <div v-if="$v.f.name.required.$invalid">- Este campo es requerido</div>
-                              <div v-else-if="$v.f.name.minLength.$invalid">Este campo debe tener {{$v.f.name.minLength.$params.min}} caracteres como minimo</div>
-                              <div v-else-if="$v.f.name.maxLength.$invalid">Este campo debe tener {{$v.f.name.maxLength.$params.max}} caracteres como maximo</div>
+                          <input type="text" id="name" class="form-control" v-model="v.f.name.$model">
+                          <div v-if="v.f.name.$error && v.f.name.$dirty" class="alert alert-danger mt-1">
+                              <div v-if="v.f.name.required.$invalid">- Este campo es requerido</div>
+                              <div v-else-if="v.f.name.minLength.$invalid">Este campo debe tener {{v.f.name.minLength.$params.min}} caracteres como minimo</div>
+                              <div v-else-if="v.f.name.maxLength.$invalid">Este campo debe tener {{v.f.name.maxLength.$params.max}} caracteres como maximo</div>
                           </div>
                       </div>
 
                       <div class="form-group col-12">
                           <label for="players">Jugadores</label>
-                          <select id="players" class="form-control" v-model="$v.f.players.$model">
+                          <select id="players" class="form-control" v-model="v.f.players.$model">
                               <option value="5">5</option>
                               <option value="6">6</option>
                               <option value="7">7</option>
@@ -41,36 +41,36 @@
 
                       <div class="form-group col-12">
                           <label for="hourprice">Precio/Hora</label>
-                          <input type="number" id="hourprice" class="form-control" v-model="$v.f.hourprice.$model">
-                          <div v-if="$v.f.hourprice.$error && $v.f.hourprice.$dirty" class="alert alert-danger mt-1">
-                              <div v-if="$v.f.hourprice.required.$invalid">- Este campo es requerido</div>
+                          <input type="number" id="hourprice" class="form-control" v-model="v.f.hourprice.$model">
+                          <div v-if="v.f.hourprice.$error && v.f.hourprice.$dirty" class="alert alert-danger mt-1">
+                              <div v-if="v.f.hourprice.required.$invalid">- Este campo es requerido</div>
                           </div>
                       </div>
 
                       <div class="form-group col-12">
                           <label for="address">Dirección</label>
-                          <input type="text" id="address" class="form-control" v-model="$v.f.address.$model">
-                          <div v-if="$v.f.address.$error && $v.f.address.$dirty" class="alert alert-danger mt-1">
-                              <div v-if="$v.f.address.required.$invalid">- Este campo es requerido</div>
+                          <input type="text" id="address" class="form-control" v-model="v.f.address.$model">
+                          <div v-if="v.f.address.$error && v.f.address.$dirty" class="alert alert-danger mt-1">
+                              <div v-if="v.f.address.required.$invalid">- Este campo es requerido</div>
                           </div>
                       </div>
 
                       <div class="form-group col-12">
                           <label for="neighborhood">Barrio</label>
-                          <select v-model="$v.f.neighborhood.$model" name="barrio" id="barrio" class="custom-select custom-select-sm">
+                          <select v-model="v.f.neighborhood.$model" name="barrio" id="barrio" class="custom-select custom-select-sm">
                               <option v-for="(barrio,i) in barrios" :key="i" :value="barrio.name">{{barrio.name}}</option>
                           </select>
-                          <!-- <input type="text" id="neighborhood" class="form-control" v-model="$v.f.neighborhood.$model"> -->
-                          <div v-if="$v.f.neighborhood.$error && $v.f.neighborhood.$dirty" class="alert alert-danger mt-1">
-                              <div v-if="$v.f.neighborhood.required.$invalid">- Este campo es requerido</div>
+                          <!-- <input type="text" id="neighborhood" class="form-control" v-model="v.f.neighborhood.$model"> -->
+                          <div v-if="v.f.neighborhood.$error && v.f.neighborhood.$dirty" class="alert alert-danger mt-1">
+                              <div v-if="v.f.neighborhood.required.$invalid">- Este campo es requerido</div>
                           </div>
                       </div>
 
                       <div class="form-group col-12">
                           <label for="description">Descripción</label>
-                          <input type="text" id="description" class="form-control" v-model="$v.f.description.$model">
-                          <div v-if="$v.f.description.$error && $v.f.description.$dirty" class="alert alert-danger mt-1">
-                              <div v-if="$v.f.description.required.$invalid">- Este campo es requerido</div>
+                          <input type="text" id="description" class="form-control" v-model="v.f.description.$model">
+                          <div v-if="v.f.description.$error && v.f.description.$dirty" class="alert alert-danger mt-1">
+                              <div v-if="v.f.description.required.$invalid">- Este campo es requerido</div>
                           </div>
                       </div>
                       <div class="form-group col-12">
@@ -95,8 +95,8 @@
                       <div class="form-group col-12">
 
                           <label for="days">Días y horarios</label>
-                          <select v-model="$v.f.days.$model" id="days" class="form-control">
-                              <option value="monday" selected="selected">Lunes</option>
+                          <select v-model="v.f.days.$model" id="days" class="form-control">
+                              <option value="monday">Lunes</option>
                               <option value="tuesday">Martes</option>
                               <option value="wednesday">Miércoles</option>
                               <option value="thursday">Jueves</option>
@@ -106,35 +106,7 @@
                           </select>
 
                           <label for="openhours">Horario de apertura</label>
-                          <select id="openhours" class="form-control" value="8" v-model="$v.f.openhours.$model">
-                              <option value="0">00:00</option>
-                              <option value="1">01:00</option>
-                              <option value="2">02:00</option>
-                              <option value="3">03:00</option>
-                              <option value="4">04:00</option>
-                              <option value="5">05:00</option>
-                              <option value="6">06:00</option>
-                              <option value="7">07:00</option>
-                              <option value="8" selected>08:00</option>
-                              <option value="9">09:00</option>
-                              <option value="10">10:00</option>
-                              <option value="11">11:00</option>
-                              <option value="12">12:00</option>
-                              <option value="13">13:00</option>
-                              <option value="14">14:00</option>
-                              <option value="15">15:00</option>
-                              <option value="16">16:00</option>
-                              <option value="17">17:00</option>
-                              <option value="18">18:00</option>
-                              <option value="19">19:00</option>
-                              <option value="20">20:00</option>
-                              <option value="21">21:00</option>
-                              <option value="22">22:00</option>
-                              <option value="23">23:00</option>
-                          </select>
-
-                          <label for="closehours">Horario de cierre</label>
-                          <select id="closehours" class="form-control" v-model="$v.f.closehours.$model">
+                          <select id="openhours" class="form-control" value="8" v-model="v.f.openhours.$model">
                               <option value="0">00:00</option>
                               <option value="1">01:00</option>
                               <option value="2">02:00</option>
@@ -161,8 +133,36 @@
                               <option value="23">23:00</option>
                           </select>
 
-                          <div class="alert alert-danger mt-1" v-if="($v.f.closehours.$model <= $v.f.openhours.$model) && ($v.f.closehours.$model)">- El horario de cierre debe ser posterior al horario de apertura</div>
-                          <div class="alert alert-danger mt-1" v-if="$v.f.dayError.$model">- Debe completar todos los campos correspondientes al día</div>
+                          <label for="closehours">Horario de cierre</label>
+                          <select id="closehours" class="form-control" v-model="v.f.closehours.$model">
+                              <option value="0">00:00</option>
+                              <option value="1">01:00</option>
+                              <option value="2">02:00</option>
+                              <option value="3">03:00</option>
+                              <option value="4">04:00</option>
+                              <option value="5">05:00</option>
+                              <option value="6">06:00</option>
+                              <option value="7">07:00</option>
+                              <option value="8">08:00</option>
+                              <option value="9">09:00</option>
+                              <option value="10">10:00</option>
+                              <option value="11">11:00</option>
+                              <option value="12">12:00</option>
+                              <option value="13">13:00</option>
+                              <option value="14">14:00</option>
+                              <option value="15">15:00</option>
+                              <option value="16">16:00</option>
+                              <option value="17">17:00</option>
+                              <option value="18">18:00</option>
+                              <option value="19">19:00</option>
+                              <option value="20">20:00</option>
+                              <option value="21">21:00</option>
+                              <option value="22">22:00</option>
+                              <option value="23">23:00</option>
+                          </select>
+
+                          <div class="alert alert-danger mt-1" v-if="(v.f.closehours.$model <= v.f.openhours.$model) && (v.f.closehours.$model)">- El horario de cierre debe ser posterior al horario de apertura</div>
+                          <div class="alert alert-danger mt-1" v-if="v.f.dayError.$model">- Debe completar todos los campos correspondientes al día</div>
                           <div class="btn btn-success col-4 mt-1" @click="addDayAndHours()">Agregar</div>
 
                           <div class="mt-1 rounded alert-info p-2" v-if="Object.keys(calendar).length !== 0">
@@ -195,6 +195,7 @@
       minLength,
       maxLength
   } from '@vuelidate/validators'
+  import { useVuelidate } from '@vuelidate/core'
   import NavbarOwner from './NavbarOwner.vue'
   import Footer from './Footer.vue'
   import mixins from '../mixins.js'
@@ -213,11 +214,52 @@
         this.resetForm();
         this.getCourt();
     },
-    
+    created() {
+        const rules = {
+          f: {
+            name: {
+                required,
+                minLength: minLength(3),
+                maxLength: maxLength(16)
+            },
+            players: {
+                required
+            },
+            hourprice: {
+                required
+            },
+            address: {
+                required
+            },
+            neighborhood: {
+                required
+            },
+            description: {
+                required
+            },
+            services: {
+
+            },
+            calendar: {
+
+            },
+            days: {
+
+            },
+            openhours: {},
+            closehours: {},
+            dayError: {}
+          }
+        }
+
+        const f = this.f
+        this.v = useVuelidate(rules, {f})
+    },
     data() {
         return {
             service: '',
             f: this.resetForm(),
+            v : null,
             url: 'https://evening-hollows-89542.herokuapp.com/courts/',
             error: false,
             dayError: false,
@@ -418,42 +460,6 @@
             ]
         }
     },
-    validations: {
-        f: {
-            name: {
-                required,
-                minLength: minLength(3),
-                maxLength: maxLength(16)
-            },
-            players: {
-                required
-            },
-            hourprice: {
-                required
-            },
-            address: {
-                required
-            },
-            neighborhood: {
-                required
-            },
-            description: {
-                required
-            },
-            services: {
-
-            },
-            calendar: {
-
-            },
-            days: {
-
-            },
-            openhours: {},
-            closehours: {},
-            dayError: {}
-        }
-    },
     methods: {
         async getCourt() {
         try {
@@ -503,16 +509,16 @@
                 })
         },
         send() {
-            this.$v.$touch()
+            this.v.$touch()
 
-            if (!this.$v.$invalid) {
+            if (!this.v.$invalid) {
                 let form = {
-                    name: this.$v.f.name.$model,
-                    players: this.$v.f.players.$model,
-                    hourprice: this.$v.f.hourprice.$model,
-                    address: this.$v.f.address.$model,
-                    neighborhood: this.$v.f.neighborhood.$model,
-                    description: this.$v.f.description.$model,
+                    name: this.v.f.name.$model,
+                    players: this.v.f.players.$model,
+                    hourprice: this.v.f.hourprice.$model,
+                    address: this.v.f.address.$model,
+                    neighborhood: this.v.f.neighborhood.$model,
+                    description: this.v.f.description.$model,
                     services: this.services,
                     calendar: this.calendar,
                     reservations: []
@@ -546,9 +552,9 @@
             }
         },
         addDayAndHours() {
-            let day = this.$v.f.days.$model
-            let openhours = this.$v.f.openhours.$model
-            let closehours = this.$v.f.closehours.$model
+            let day = this.v.f.days.$model
+            let openhours = this.v.f.openhours.$model
+            let closehours = this.v.f.closehours.$model
             // console.log("close",closehours)
             // console.log("open",openhours)
             // console.log("day",day)
