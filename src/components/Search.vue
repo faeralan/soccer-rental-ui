@@ -82,8 +82,16 @@
         today: new Date(Date.now()).toISOString().split('T')[0],
         maxDate: this.today,
         turnos: [
-          {'value':'08','hour':'08:00'},
-          {'value':'09','hour':'09:00'},
+          {'value':'0','hour':'00:00'},
+          {'value':'1','hour':'01:00'},
+          {'value':'2','hour':'02:00'},
+          {'value':'3','hour':'03:00'},
+          {'value':'4','hour':'04:00'},
+          {'value':'5','hour':'05:00'},
+          {'value':'6','hour':'06:00'},
+          {'value':'7','hour':'07:00'},
+          {'value':'8','hour':'08:00'},
+          {'value':'9','hour':'09:00'},
           {'value':'10','hour':'10:00'},
           {'value':'11','hour':'11:00'},
           {'value':'12','hour':'12:00'},
@@ -96,7 +104,8 @@
           {'value':'19','hour':'19:00'},
           {'value':'20','hour':'20:00'},
           {'value':'21','hour':'21:00'},
-          {'value':'22','hour':'22:00'}
+          {'value':'22','hour':'22:00'},
+          {'value':'23','hour':'23:00'}
         ],
         cantidad: [
           {'value':'5','name':'Fútbol 5'},
@@ -163,7 +172,7 @@
           date: new Date(Date.now()).toISOString().split('T')[0],
           // date: null,
           players: '5',
-          hour: '08',
+          hour: new Date().getHours()+1,
           neighborhood: 'Agronomía'
         },
         error: false

@@ -19,6 +19,8 @@
                         <input type="text" id="name" class="form-control" v-model="$v.f.name.$model">
                         <div v-if="$v.f.name.$error && $v.f.name.$dirty" class="alert alert-danger mt-1">
                             <div v-if="$v.f.name.required.$invalid">- Este campo es requerido</div>
+                            <div v-else-if="$v.f.name.minLength.$invalid">Este campo debe tener {{$v.f.name.minLength.$params.min}} caracteres como minimo</div>
+                            <div v-else-if="$v.f.name.maxLength.$invalid">Este campo debe tener {{$v.f.name.maxLength.$params.max}} caracteres como maximo</div>
                         </div>
                     </div>
 
@@ -52,7 +54,10 @@
 
                     <div class="form-group col-12">
                         <label for="neighborhood">Barrio</label>
-                        <input type="text" id="neighborhood" class="form-control" v-model="$v.f.neighborhood.$model">
+                        <select v-model="$v.f.neighborhood.$model" name="barrio" id="barrio" class="custom-select custom-select-sm">
+                            <option v-for="(barrio,i) in barrios" :key="i" :value="barrio.name">{{barrio.name}}</option>
+                        </select>
+                        <!-- <input type="text" id="neighborhood" class="form-control" v-model="$v.f.neighborhood.$model"> -->
                         <div v-if="$v.f.neighborhood.$error && $v.f.neighborhood.$dirty" class="alert alert-danger mt-1">
                             <div v-if="$v.f.neighborhood.required.$invalid">- Este campo es requerido</div>
                         </div>
@@ -198,7 +203,57 @@ export default {
             url: 'https://evening-hollows-89542.herokuapp.com/courts',
             error: false,
             services: [],
-            calendar: {}
+            calendar: {},
+            barrios: [
+                {'value':'Agronomía','name':'Agronomía'},
+                {'value':'Almagro','name':'Almagro'},
+                {'value':'Balvanera','name':'Balvanera'},
+                {'value':'Barracas','name':'Barracas'},
+                {'value':'Belgrano','name':'Belgrano'},
+                {'value':'Boedo','name':'Boedo'},
+                {'value':'Caballito','name':'Caballito'},
+                {'value':'Chacarita','name':'Chacarita'},
+                {'value':'Coghlan','name':'Coghlan'},
+                {'value':'Colegiales','name':'Colegiales'},
+                {'value':'Constitución','name':'Constitución'},
+                {'value':'Flores','name':'Flores'},
+                {'value':'Floresta','name':'Floresta'},
+                {'value':'La Boca','name':'La Boca'},
+                {'value':'La Paternal','name':'La Paternal'},
+                {'value':'Liniers','name':'Liniers'},
+                {'value':'Mataderos','name':'Mataderos'},
+                {'value':'Monte Castro','name':'Monte Castro'},
+                {'value':'Montserrat','name':'Montserrat'},
+                {'value':'Nueva Pompeya','name':'Nueva Pompeya'},
+                {'value':'Nuñez','name':'Nuñez'},
+                {'value':'Palermo','name':'Palermo'},
+                {'value':'Parque Avellaneda','name':'Parque Avellaneda'},
+                {'value':'Parque Chacabuco','name':'Parque Chacabuco'},
+                {'value':'Parque Chas','name':'Parque Chas'},
+                {'value':'Parque Patricios','name':'Parque Patricios'},
+                {'value':'Puerto Madero','name':'Puerto Madero'},
+                {'value':'Recoleta','name':'Recoleta'},
+                {'value':'Retiro','name':'Retiro'},
+                {'value':'Saavedra','name':'Saavedra'},
+                {'value':'San Cristóbal','name':'San Cristóbal'},
+                {'value':'San Nicolás','name':'San Nicolás'},
+                {'value':'San Telmo','name':'San Telmo'},
+                {'value':'Versalles','name':'Versalles'},
+                {'value':'Villa Crespo','name':'Villa Crespo'},
+                {'value':'Villa Devoto','name':'Villa Devoto'},
+                {'value':'Villa General Mitre','name':'Villa General Mitre'},
+                {'value':'Villa Lugano','name':'Villa Lugano'},
+                {'value':'Villa Luro','name':'Villa Luro'},
+                {'value':'Villa Ortúzar','name':'Villa Ortúzar'},
+                {'value':'Villa Pueyrredón','name':'Villa Pueyrredón'},
+                {'value':'Villa Real','name':'Villa Real'},
+                {'value':'Villa Riachuelo','name':'Villa Riachuelo'},
+                {'value':'Villa Santa Rita','name':'Villa Santa Rita'},
+                {'value':'Villa Soldati','name':'Villa Soldati'},
+                {'value':'Villa Urquiza','name':'Villa Urquiza'},
+                {'value':'Villa del Parque','name':'Villa del Parque'},
+                {'value':'Vélez Sarsfield','name':'Vélez Sarsfield'}
+            ]
         }
     },
     validations: {

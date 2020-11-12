@@ -143,7 +143,7 @@ import { required } from '@vuelidate/validators'
 
 <style scoped lang="css">
   .src-components-login-customer {
-    min-height: 600px;
+    min-height: 1000px;
     background: url(../assets/slide6.jpg);
     background-size: cover;
     background-repeat: no-repeat;

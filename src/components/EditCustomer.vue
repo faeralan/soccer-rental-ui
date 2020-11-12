@@ -141,7 +141,6 @@
             password : '',
             passwordConfirm: ''
         },
-        url_data : 'https://evening-hollows-89542.herokuapp.com/customers/',
         url : 'https://evening-hollows-89542.herokuapp.com/customers/',
         error: false,
         modif: false,
@@ -183,7 +182,7 @@
     methods: {
       async getDatos() {
       try {
-        let data = await this.axios.get(this.url_data, { headers: {
+        let data = await this.axios.get(this.url, { headers: {
               'Authorization' : `Bearer ${this.$store.state.isLoggedCustomer}`,
               'Content-Type': 'application/json'
             }
@@ -228,8 +227,8 @@
         },
         send() {
             this.$v.$touch()
-            
-            if(!this.$v.$invalid) {
+            this.modif = false;
+            if(!this.$v.$invalid && (this.$v.f.passwordConfirm.$model == this.$v.f.password.$model)) {
               let form = {
                 name: this.$v.f.name.$model,
                 lastname: this.$v.f.lastname.$model,

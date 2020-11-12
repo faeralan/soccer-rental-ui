@@ -11,6 +11,7 @@ import Confirmation from '../components/Confirmation.vue'
 import PanelOwners from '../components/PanelOwners.vue'
 import CreateCourt from '../components/CreateCourt.vue'
 import ProfileCustomer from '../components/ProfileCustomer.vue'
+import EditOwner from '../components/EditOwner.vue'
 
 const routes = [
     { path: '/', name: 'Index', component: Index },
@@ -24,6 +25,7 @@ const routes = [
     { path: '/confirmation', name: 'Confirmation', component: Confirmation},
     { path: '/admin/index', name: 'PanelOwners', component: PanelOwners},
     { path: '/admin/create-court', name: 'CreateCourt', component: CreateCourt},
+    { path: '/admin/edit-owner', name: 'EditOwner', component: EditOwner},
     { path: '/profile', name: 'ProfileCustomer', component: ProfileCustomer},
     { path: '/:catchAll(.*)', name: 'NotFound', component: Index}
 ]

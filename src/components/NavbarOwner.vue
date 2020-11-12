@@ -2,7 +2,7 @@
 
   <section class="src-components-navbar-owner">
     <nav class="navbar navbar-expand-lg navbar-light bg-info">
-      <a class="font-italic navbar-brand" href="#">Juego Limpio</a>
+      <a class="font-italic navbar-brand" href="/admin/index">Juego Limpio</a>
       <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarText" aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
@@ -18,7 +18,12 @@
         </span>
         <span class="navbar-text">
           <li class="nav-item">
-            <a class="nav-link login-btn" href="/login-customer">Editar Usuario</a>
+            <a class="nav-link login-btn mr-15" href="/admin/reservas">Reservas</a>
+          </li>
+        </span>
+        <span class="navbar-text">
+          <li class="nav-item">
+            <a class="nav-link login-btn" href="/admin/edit-owner">Editar Usuario</a>
           </li>
         </span>
         <span class="navbar-text">
