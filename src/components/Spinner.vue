@@ -1,30 +1,28 @@
 <template>
-
-  <section class="src-components-spinner">
+<section class="src-components-spinner">
     <div class="row d-flex justify-content-center">
-      <div class="d-flex justify-content-center">
-        <moon-loader :loading="loading" :color="color" :size="size"></moon-loader>
-      </div>
+        <div class="d-flex justify-content-center">
+            <moon-loader :loading="loading" :color="color" :size="size"></moon-loader>
+        </div>
     </div>
-  </section>
-
+</section>
 </template>
 
 <script>
-  import MoonLoader from 'vue-spinner/src/MoonLoader.vue'
-  export default  {
+import MoonLoader from 'vue-spinner/src/MoonLoader.vue'
+export default {
     name: 'src-components-spinner',
     props: [],
     components: {
-      MoonLoader
+        MoonLoader
     },
-    mounted () {
+    mounted() {
 
     },
-    data () {
-      return {
-        loading: true
-      }
+    data() {
+        return {
+            loading: true
+        }
     },
     methods: {
 
@@ -33,13 +31,11 @@
 
     }
 }
-
-
 </script>
 
-<style scoped lang="css">
-  .src-components-spinner {
-    background-color: #fafafa !important;
+<style lang="css" scoped>
+.src-components-spinner {
+    background-color: transparent !important;
     padding-top: 30px;
-  }
+}
 </style>

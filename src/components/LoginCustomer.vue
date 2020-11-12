@@ -101,6 +101,7 @@ export default {
                 .catch(error => {
                     console.log(error)
                     this.error = true
+                    this.loading = false
                     setTimeout(() => {
                         this.error = false
                     }, 5000)
