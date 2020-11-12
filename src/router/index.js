@@ -9,6 +9,7 @@ import RegisterSuccess from '../components/RegisterSuccess.vue'
 import Details from '../components/Details.vue'
 import Confirmation from '../components/Confirmation.vue'
 import PanelOwners from '../components/PanelOwners.vue'
+import CreateCourt from '../components/CreateCourt.vue'
 
 const routes = [
     { path: '/', name: 'Index', component: Index },
@@ -20,7 +21,8 @@ const routes = [
     { path: '/register-success', name: 'RegisterSuccess', component: RegisterSuccess },
     { path: '/details/:id', name: 'Details', component: Details, props: true },
     { path: '/confirmation', name: 'Confirmation', component: Confirmation},
-    { path: '/admin/index', name: 'PanelOwners', component: PanelOwners}
+    { path: '/admin/index', name: 'PanelOwners', component: PanelOwners},
+    { path: '/admin/create-court', name: 'CreateCourt', component: CreateCourt}
 ]
 
 const router = createRouter({

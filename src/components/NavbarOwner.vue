@@ -13,7 +13,7 @@
         </ul>
         <span class="navbar-text">
           <li class="nav-item">
-            <a class="nav-link login-btn mr-15" href="/register">ABM Canchas</a>
+            <a class="nav-link login-btn mr-15" href="/admin/index">ABM Canchas</a>
           </li>
         </span>
         <span class="navbar-text">
