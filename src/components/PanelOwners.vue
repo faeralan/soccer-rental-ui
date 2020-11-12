@@ -109,7 +109,7 @@ export default {
             }
         },
         updateCourt(id) {
-            this.$router.push('/admin/edit-court/'+id)
+            this.$router.push('/admin/edit-court/' + id)
         },
         async deleteCourt(courtId) {
             try {
@@ -120,6 +120,7 @@ export default {
                     }
                 })
                 console.log(data.data)
+                this.getDatos()
                 this.loading = false;
                 this.$router.push('/admin/index')
             } catch (error) {
