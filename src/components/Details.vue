@@ -4,9 +4,12 @@
     <Carousel />
     <div class="container-fluid src-components-details">
       <div class="container">
-        <div class="row p-0">
-          <Spinner v-if="loading" />
-
+        <div v-if="loading" class="row p-0">
+          <Spinner />
+        </div>
+        <div v-else-if="!loading" class="row p-0">
+          
+          
           <div class="col col-sm-3">
             <img v-if="!court.image" src="../assets/court_example.jpg" class="img-fluid" alt="" />
             <img v-else-if="court.image" :src="court.image" class="img-fluid" alt="" />

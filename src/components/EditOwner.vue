@@ -121,6 +121,7 @@
         </div>
       </div>
     </div>
+    <Footer/>
   </section>
 
 </template>
@@ -128,11 +129,13 @@
 <script>
   import { required, minLength, maxLength, email } from '@vuelidate/validators'
   import NavbarOwner from './NavbarOwner.vue'
+  import Footer from './Footer.vue'
   export default  {
     name: 'src-components-edit-owner',
     props: [],
     components: {
-      NavbarOwner
+      NavbarOwner,
+      Footer
     },
     created () {
       this.getDatos();

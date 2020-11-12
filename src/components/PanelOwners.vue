@@ -57,12 +57,13 @@
             </div>
         </div>
     </div>
-
+    <!-- <Footer/> -->
 </section>
 </template>
 
 <script>
 import NavbarOwner from './NavbarOwner.vue'
+// import Footer from './Footer.vue'
 import Spinner from './Spinner.vue'
 import mixins from "../mixins.js";
 export default {
