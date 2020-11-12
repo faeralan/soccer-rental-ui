@@ -23,7 +23,7 @@ const routes = [
     { path: '/details/:id/:date', name: 'Details', component: Details, props: true },
     { path: '/confirmation', name: 'Confirmation', component: Confirmation},
     { path: '/admin/index', name: 'PanelOwners', component: PanelOwners},
-    { path: '/admin/create-court', name: 'CreateCourt', component: CreateCourt}
+    { path: '/admin/create-court', name: 'CreateCourt', component: CreateCourt},
     { path: '/profile', name: 'ProfileCustomer', component: ProfileCustomer},
     { path: '/:catchAll(.*)', name: 'NotFound', component: Index}
 ]
