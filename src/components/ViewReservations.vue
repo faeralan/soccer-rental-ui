@@ -91,14 +91,16 @@ export default {
           for(obj of reservas.data){
             
             for(rObj of obj.reservations){
-              let reserv = {
-                name: obj.name,
-                address: obj.address,
-                hourprice: obj.hourprice,
-                date: rObj.date,
-              };
-              
-              this.resultados.push(reserv)
+              if(rObj.customer == obj._id){
+                let reserv = {
+                  name: obj.name,
+                  address: obj.address,
+                  hourprice: obj.hourprice,
+                  date: rObj.date,
+                };
+                
+                this.resultados.push(reserv)
+              }
             }
           }
 

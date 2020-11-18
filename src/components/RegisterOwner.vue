@@ -229,7 +229,7 @@ import { required, minLength, maxLength, email } from '@vuelidate/validators'
 
 <style scoped lang="css">
   .src-components-register-owner {
-    min-height: 600px;
+    min-height: 1000px;
     background: url(../assets/slide9.jpg);
     background-size: cover;
     background-repeat: no-repeat;

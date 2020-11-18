@@ -136,7 +136,7 @@ export default {
 
 <style lang="css" scoped>
 .src-components-panel-owners {
-    min-height: 600px;
+    min-height: 1000px;
     background: url(../assets/slide8.jpg);
     background-size: cover;
     background-repeat: no-repeat;

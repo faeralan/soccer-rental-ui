@@ -35,7 +35,7 @@
             </div>
             <div class="row">
               <div class="col-xs-12 offset-sm-9 col-sm-3 p-right">
-                <a class="reservar" @click="redirect(court._id)">Reservar</a>
+                <a class="reservar" @click="redirect(court._id)">Ver más</a>
               </div>
             </div>
           </div>
