@@ -91,7 +91,7 @@ export default {
           for(obj of reservas.data){
             
             for(rObj of obj.reservations){
-              if(rObj.customer == obj._id){
+              
                 let reserv = {
                   name: obj.name,
                   address: obj.address,
@@ -100,7 +100,7 @@ export default {
                 };
                 
                 this.resultados.push(reserv)
-              }
+              
             }
           }
 
